@@ -13,7 +13,7 @@
 <body>
     <header>
         <nav>
-            <button class="new-task"><img src="./assets/add.png" alt=""></button>
+            <button class="new-task image-btn"><img src="./assets/add.png" alt=""></button>
         </nav>
     </header>
     <div class="row-container" id="content">
@@ -36,17 +36,35 @@
                     </li>
                 </ul>
             </nav>
-            <button id="open-projects-btn">v</button>
+            <button class="open-dropdown row-container image-btn">
+                <img src="./assets/down-arrow.png" alt="Open projects menu">
+                <h3>Projects</h3>
+            </button>
             <nav id="projects">
                 <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li class="project row-container">
+                        <div class="row-container">
+                            <img class="circle" src="./assets/circle.png" alt="">
+                            <span>Project 1</span>
+                        </div>
+                        <span class="project-tasks-count">26</span>
+                    </li>
+                    <li class="project row-container">
+                        <div class="row-container">
+                            <img class="circle" src="./assets/circle.png" alt="">
+                            <span>Project 2</span>
+                        </div>
+                        <span class="project-tasks-count">26</span>
+                    </li>
+                    <li class="project row-container">
+                        <div class="row-container">
+                            <img class="circle" src="./assets/circle.png" alt="">
+                            <span>Project 3</span>
+                        </div>
+                        <span class="project-tasks-count">26</span>
+                    </li>
                 </ul>
             </nav>
-            <div class="col-container">
-                a
-            </div>
         </aside>
     </div>
     <script src="./main.js"></script>

@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"> 
     <title>To-do</title>
 </head>
 <body>
@@ -17,19 +20,19 @@
         <aside>
             <nav class="col-container" id="main-projects">
                 <ul>
-                    <li>
-                        <div class="project row-container">
-                            <img src="inbox.png" alt="">
+                    <li class="project row-container">
+                        <div class="row-container">
+                            <img class="project-icon" src="./assets/inbox.png" alt="">
                             <span class="project-name">Inbox</span>
-                            <span class="project-tasks-count">26</span>
                         </div>
+                        <span class="project-tasks-count">26</span>
                     </li>
-                    <li>
-                        <div class="project row-container">
-                            <img src="today.png" alt="">
-                            <span class="project-name">Today</span>
-                            <span class="project-tasks-count">4</span>
+                    <li class="project row-container">
+                        <div class="row-container">
+                            <img class="project-icon" src="./assets/today.png" alt="">
+                            <span class="project-name" id="today-project">Today</span>
                         </div>
+                        <span class="project-tasks-count">4</span>
                     </li>
                 </ul>
             </nav>

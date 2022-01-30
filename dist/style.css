@@ -11,7 +11,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, button {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -134,7 +134,7 @@ aside {
 
 .project.row-container {
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .project.row-container>div {
@@ -149,6 +149,10 @@ aside {
 
 .project {
     cursor: pointer;
+}
+.project-tasks-count {
+    font-size: 0.85rem;
+    color: gray;
 }
 
 /* Because of the icon design, word 'Today' near the icon may seem not centered. This is needed to adjust. */
@@ -165,7 +169,7 @@ aside ul li {
     padding: 10px;
     align-items: center;
 
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 aside ul li:hover {
@@ -186,7 +190,7 @@ aside ul li.selected {
     gap: 8px;
 
     font-weight: bold;
-    font-size: 1rem;
+    font-size: calc(1rem + 1px);
     margin-top: 24px;
 
     cursor: pointer;

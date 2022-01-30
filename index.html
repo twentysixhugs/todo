@@ -4,9 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>To-do</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <button class="new-task"><img src="./assets/add.png" alt=""></button>
+        </nav>
+    </header>
+    <div class="row-container" id="content">
+        <aside>
+            <nav class="col-container" id="main-projects">
+                <ul>
+                    <li>
+                        <div class="project row-container">
+                            <img src="inbox.png" alt="">
+                            <span class="project-name">Inbox</span>
+                            <span class="project-tasks-count">26</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="project row-container">
+                            <img src="today.png" alt="">
+                            <span class="project-name">Today</span>
+                            <span class="project-tasks-count">4</span>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <button id="open-projects-btn">v</button>
+            <nav id="projects">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </nav>
+            <div class="col-container">
+                a
+            </div>
+        </aside>
+    </div>
     <script src="./main.js"></script>
 </body>
 </html>

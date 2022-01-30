@@ -1,11 +1,59 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 body, html {
     height: 100%;
+    font-size: 16px;
 }
 
 body {
     margin: 0;
     display: flex;
     flex-direction: column;
+
+    font-family: 'Roboto', sans-serif;
 }
 
 #content {
@@ -22,6 +70,17 @@ body {
     flex-direction: column;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.image-btn {
+    background: none;
+    border: none;
+}
+
 /* Header */
 
 header {
@@ -33,7 +92,7 @@ header {
     background: #dc4c3e;
 }
 
-/* Buttons */
+/* Header button */
 
 .new-task {
     width: 32px;
@@ -43,9 +102,8 @@ header {
     align-items: center;
     justify-content: center;
 
-    border: none;
     border-radius: 6px;
-    background: none;
+
 }
 
 .new-task:hover {
@@ -69,5 +127,79 @@ header {
 aside {
     height: 100%;
     width: 305px;
+    padding: 35px 15px 0 30px;
+    box-sizing: border-box;
     background: #f6f6f6;
+}
+
+.project.row-container {
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.project.row-container>div {
+    gap: 12px;
+    align-items: center;
+}
+
+.project-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.project {
+    cursor: pointer;
+}
+
+/* Because of the icon design, word 'Today' near the icon may seem not centered. This is needed to adjust. */
+#today-project {
+    margin-top: 2px;
+}
+
+aside ul {
+    display: flex;
+    flex-direction: column;
+}
+
+aside ul li {
+    padding: 10px;
+    align-items: center;
+
+    border-radius: 10px;
+}
+
+aside ul li:hover {
+    background: lightgrey;
+    
+    transition: all 0.2s;
+}
+
+aside ul li.selected {
+    background: lightgrey;
+}
+
+.open-dropdown {
+    width: 100%;
+    padding: 10px 9px;
+
+    align-items: center;
+    gap: 8px;
+
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 24px;
+
+    cursor: pointer;
+}
+
+.open-dropdown>img {
+    width: 12px;
+    height: 12px;
+
+    filter: invert(0.2);
+    transform: rotate(-90deg);
+}
+
+.circle {
+    width: 10px;
 }

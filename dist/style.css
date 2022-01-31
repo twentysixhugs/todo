@@ -88,18 +88,22 @@ ul {
 header {
     padding: 7px;
     display: flex;
-    flex-direction: row-reverse;
     align-items: center;
 
     background: #dc4c3e;
 }
 
-/* Header button */
+header nav {
+    width: 100%;
+    justify-content: space-between;
+}
 
-.new-task {
+/* Header buttons */
+
+header button {
     width: 32px;
     height: 32px;
-    margin-right: 30px;
+    margin: 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,16 +112,16 @@ header {
 
 }
 
-.new-task:hover {
+header button:hover {
     background-color: #e7695d;
     transition: all 0.2s;
 }
 
-.new-task:active {
+header button:active {
     background-color: #f16d60;
 }
 
-.new-task img {
+header button img {
     width: 20px;
     height: 20px;
     

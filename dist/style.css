@@ -236,7 +236,7 @@ aside>div {
 }
 
 footer {
-    margin-bottom: 20px;
+    margin: 20px 0;
 
     font-size: calc(1rem - 2px);
 
@@ -254,11 +254,14 @@ a {
 /* Project content */
 
 #project-content {
+    height: calc(100vh - 46px);
     width: calc(100vw - 305px);
     padding: 45px 160px;
     box-sizing: border-box;
     
     gap: 30px;
+
+    overflow-y: scroll;
 }
 
 #project-header {
@@ -294,6 +297,7 @@ a {
     align-items: flex-end;
 
     border-radius: 6px;
+    cursor:default;
 }
 
 .task:hover {

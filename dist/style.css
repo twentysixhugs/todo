@@ -75,6 +75,12 @@ ul {
 .image-btn {
     background: none;
     border: none;
+
+    cursor: pointer;
+}
+
+#content {
+    height: 100%;
 }
 
 /* Header */
@@ -121,10 +127,20 @@ header {
 /* Sidebar */
 
 aside {
+    position: fixed;
+
+    height: calc(100vh - 46px);
     width: 305px;
     padding: 35px 15px 0 30px;
     box-sizing: border-box;
+
     background: #f6f6f6;
+
+    overflow-x: hidden;
+}
+
+aside:hover {
+    overflow-y: auto;
 }
 
 .project.row-container {
@@ -201,4 +217,24 @@ aside ul li.selected {
 
 .circle {
     width: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+
+    margin-bottom: 20px;
+
+    font-size: calc(1rem - 2px);
+
+    color: rgb(0, 0, 0);
+
+    opacity: 0.7;
+
+}
+
+a {
+    text-decoration: none;
+
+    color: rgb(70, 0, 0);
 }

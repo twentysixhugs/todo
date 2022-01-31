@@ -11,7 +11,7 @@
     <title>To-do</title>
 </head>
 <body>
-    <header>
+    <header id="main-header">
         <nav class="row-container">
             <button class="image-btn" id="toggle-sidebar"><img src="./assets/menu.png" alt="toggle sidebar button"></button>
             <button class="new-task image-btn"><img src="./assets/add.png" alt=""></button>
@@ -67,16 +67,64 @@
                             </div>
                             <span class="project-tasks-count">26</span>
                         </li>
-                        
                     </ul>
                 </nav>
                 <footer>Made with love by <a href="https://github.com/twentysixhugs" target="_blank">twentysixhugs</a> :3</footer>
             </div>
         </aside>
         <div class="col-container" id="project-content">
-            <h1>Today</h1>
-            <div id="project-tasks">
-
+            <header id="project-header" class="row-container">
+                <h1>Today</h1>
+                <span id="project-current-date">Jan 31, 2022</span>
+            </header>
+            <div class="col-container" id="project-tasks">
+                <div class="task row-container" data-project="inbox" data-index="0">
+                    <div class="task-main row-container">
+                        <button class="complete-task-btn"></button>
+                        <div class="task-content col-container">
+                            <h2 class="task-name">Hug somebody</h3>
+                            <p class="task-description">When you hug people, you feel better</p>
+                            <div class="task-date row-container"><img src="./assets/calendar.png" alt=""><span class="today-text">Today</span></div>
+                        </div>
+                    </div>
+                    <div class="col-container">
+                        <nav class="priority-selection row-container">
+                            <button class="priority-btn priority-3 image-btn">
+                                <img src="./assets/flag.png" alt="set priority 3">
+                            </button>
+                            <button class="priority-btn priority-2 image-btn">
+                                <img src="./assets/flag.png" alt="set priority 2">
+                            </button>
+                            <button class="priority-btn priority-1 image-btn">
+                                <img src="./assets/flag.png" alt="set priority 1">
+                            </button>
+                        </nav>
+                        <div class="task-project">Inbox</div>
+                    </div>
+                </div>
+                <div class="task row-container" data-project="inbox" data-index="0">
+                    <div class="task-main row-container">
+                        <button class="complete-task-btn"></button>
+                        <div class="task-content col-container">
+                            <h2 class="task-name">Hug somebody</h3>
+                            <div class="task-date row-container"><img src="./assets/calendar.png" alt=""><span class="today-text">Today</span></div>
+                        </div>
+                    </div>
+                    <div class="col-container">
+                        <nav class="priority-selection row-container">
+                            <button class="priority-btn priority-3 image-btn">
+                                <img src="./assets/flag.png" alt="set priority 3">
+                            </button>
+                            <button class="priority-btn priority-2 image-btn">
+                                <img src="./assets/flag.png" alt="set priority 2">
+                            </button>
+                            <button class="priority-btn priority-1 image-btn">
+                                <img src="./assets/flag.png" alt="set priority 1">
+                            </button>
+                        </nav>
+                        <div class="task-project">Inbox</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

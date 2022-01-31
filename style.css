@@ -73,6 +73,7 @@ ul {
 }
 
 .image-btn {
+    display: flex;
     background: none;
     border: none;
 }
@@ -200,18 +201,42 @@ aside ul li.selected {
     background: rgb(211, 211, 211);
 }
 
-.open-dropdown {
-    width: 100%;
+#projects-menu {
+    align-items: center;
     padding: 10px 9px;
+    margin-top: 24px;
+}
+
+.open-dropdown {
+    width: calc(100% - 22px);
 
     align-items: center;
     gap: 8px;
 
     font-weight: bold;
     font-size: calc(1rem + 1px);
-    margin-top: 24px;
+}
 
+#new-project {
+    width: 22px;
+    height: 22px;
 
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 3px;
+}
+
+#new-project:hover {
+    background: rgb(224, 224, 224);
+    transition: all 0.1s;
+}
+
+#new-project>img {
+    width: 17px;
+    height: 17px;
+
+    filter: invert(0.1);
 }
 
 .open-dropdown>img {
@@ -339,7 +364,8 @@ a {
 }
 
 .complete-task-btn:hover {
-    background: #ebebeb;
+    transition: all 0.2s;
+    background: #dbdbdb;
 }
 
 .task-date {
@@ -375,6 +401,10 @@ a {
 .priority-selection img {
     width: 20px;
     height: 20px;
+}
+
+.priority-btn img{
+    transition: all 0.1s;
 }
 
 .priority-btn.priority-1 img {

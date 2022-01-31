@@ -75,17 +75,19 @@ ul {
 .image-btn {
     background: none;
     border: none;
-
-    cursor: pointer;
 }
 
 #content {
     height: 100%;
 }
 
-/* Header */
+button {
+    cursor: pointer;
+}
 
-header {
+/* Main page header */
+
+#main-header {
     padding: 7px;
     display: flex;
     align-items: center;
@@ -93,14 +95,14 @@ header {
     background: #dc4c3e;
 }
 
-header nav {
+#main-header nav {
     width: 100%;
     justify-content: space-between;
 }
 
 /* Header buttons */
 
-header button {
+#main-header button {
     width: 32px;
     height: 32px;
     margin: 0 30px;
@@ -112,16 +114,16 @@ header button {
 
 }
 
-header button:hover {
+#main-header button:hover {
     background-color: #e7695d;
     transition: all 0.2s;
 }
 
-header button:active {
+#main-header button:active {
     background-color: #f16d60;
 }
 
-header button img {
+#main-header button img {
     width: 20px;
     height: 20px;
     
@@ -165,6 +167,7 @@ aside:hover {
 .project {
     cursor: pointer;
 }
+
 .project-tasks-count {
     font-size: 0.85rem;
     color: rgb(128, 128, 128);
@@ -208,7 +211,7 @@ aside ul li.selected {
     font-size: calc(1rem + 1px);
     margin-top: 24px;
 
-    cursor: pointer;
+
 }
 
 .open-dropdown>img {
@@ -251,6 +254,160 @@ a {
 /* Project content */
 
 #project-content {
-    position: fixed;
-    right: 0;
+    width: calc(100vw - 305px);
+    padding: 45px 160px;
+    box-sizing: border-box;
+    
+    gap: 30px;
+}
+
+#project-header {
+    gap: 8px;
+    align-items: flex-end;
+}
+
+#project-header h1 {
+    font-size: calc(1rem + 6px);
+    font-weight: bold;
+}
+
+#project-header #project-current-date {
+    margin-bottom: 2px;
+
+    font-size: calc(1rem - 3px);
+
+    color: #808080;
+}
+
+/* Project tasks */
+
+#project-tasks {
+    gap: 12px;
+}
+
+/* Task */
+
+.task {
+    padding: 8px;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    border-radius: 6px;
+}
+
+.task:hover {
+    background: whitesmoke;
+}
+
+.task-main {
+    gap: 8px;
+}
+
+.task-main h2 {
+    margin-bottom: 2px;
+
+    font-size: calc(1rem + 2px);
+    font-weight: 400;
+}
+
+.task-main .task-description {
+    font-size: calc(1rem - 3px);
+}
+
+.task-main+div {
+    align-self: flex-start;
+}
+
+.task-content {
+    gap: 6px;
+}
+
+.complete-task-btn {
+    min-width: 22px;
+    min-height: 22px;
+    width: 22px;
+    height: 22px;
+
+    background: none;
+    border: 2px solid #808080; 
+    border-radius: 100%;
+}
+
+.complete-task-btn:hover {
+    background: #ebebeb;
+}
+
+.task-date {
+    gap: 6px;
+    align-items: flex-end;
+
+    font-size: calc(1rem - 2px);
+}
+
+.task-date>img {
+    height: 15px;
+    width: 15px;
+
+    filter: hue-rotate(120deg) brightness(85%) saturate(120%);
+}
+
+.task-date>.today-text {
+    color: rgb(199, 42, 199);
+}
+
+.priority-selection {
+    gap: 8px;
+}
+
+.priority-selection .priority-btn {
+    width: 30px;
+    height: 30px;
+
+    background: none;
+    border-radius: 100%;
+}
+
+.priority-selection img {
+    width: 20px;
+    height: 20px;
+}
+
+.priority-btn.priority-1 img {
+    -webkit-filter: hue-rotate(175deg) brightness(84%);
+            filter: hue-rotate(175deg) brightness(84%);       
+}
+
+.priority-btn.priority-2 img {
+    -webkit-filter: hue-rotate(350deg) brightness(94%);
+        filter: hue-rotate(350deg) brightness(94%);   
+}
+
+.priority-btn.priority-3 img {
+    -webkit-filter: hue-rotate(307deg) brightness(79%);
+        filter: hue-rotate(307deg) brightness(79%);   
+}
+
+.priority-btn.priority-1 img:hover {
+    -webkit-filter: hue-rotate(175deg) brightness(60%);
+            filter: hue-rotate(175deg) brightness(60%);       
+}
+
+.priority-btn.priority-2 img:hover {
+    -webkit-filter: hue-rotate(350deg) brightness(70%);
+            filter: hue-rotate(350deg) brightness(70%);       
+}
+
+.priority-btn.priority-3 img:hover {
+    -webkit-filter: hue-rotate(307deg) brightness(55%);
+            filter: hue-rotate(307deg) brightness(55%);       
+}
+
+.task-project {
+    padding-right: 10px;
+
+    text-align: end;
+    font-size: calc(1rem - 4px);
+
+    color: #808080;
 }

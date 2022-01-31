@@ -131,7 +131,7 @@ header button img {
 /* Sidebar */
 
 aside {
-    position: fixed;
+    /* position: fixed; */
 
     height: calc(100vh - 46px);
     width: 305px;
@@ -167,7 +167,7 @@ aside:hover {
 }
 .project-tasks-count {
     font-size: 0.85rem;
-    color: gray;
+    color: rgb(128, 128, 128);
 }
 
 /* Because of the icon design, word 'Today' near the icon may seem not centered. This is needed to adjust. */
@@ -188,13 +188,13 @@ aside ul li {
 }
 
 aside ul li:hover {
-    background: lightgrey;
+    background: rgb(211, 211, 211);
     
     transition: all 0.2s;
 }
 
 aside ul li.selected {
-    background: lightgrey;
+    background: rgb(211, 211, 211);
 }
 
 .open-dropdown {
@@ -223,10 +223,16 @@ aside ul li.selected {
     width: 10px;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
+aside>div:first-child {
+    flex: 1;
+}
 
+aside>div {
+    flex: 4;
+    justify-content: space-between;
+}
+
+footer {
     margin-bottom: 20px;
 
     font-size: calc(1rem - 2px);
@@ -234,11 +240,17 @@ footer {
     color: rgb(0, 0, 0);
 
     opacity: 0.7;
-
 }
 
 a {
     text-decoration: none;
 
     color: rgb(70, 0, 0);
+}
+
+/* Project content */
+
+#project-content {
+    position: fixed;
+    right: 0;
 }

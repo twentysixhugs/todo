@@ -18,56 +18,67 @@
         </nav>
     </header>
     <div class="row-container" id="content">
-        <aside>
-            <nav class="col-container" id="main-projects">
-                <ul>
-                    <li class="project row-container">
-                        <div class="row-container">
-                            <img class="project-icon" src="./assets/inbox.png" alt="">
-                            <span class="project-name">Inbox</span>
-                        </div>
-                        <span class="project-tasks-count">26</span>
-                    </li>
-                    <li class="project row-container">
-                        <div class="row-container">
-                            <img class="project-icon" src="./assets/today.png" alt="">
-                            <span class="project-name" id="today-project">Today</span>
-                        </div>
-                        <span class="project-tasks-count">4</span>
-                    </li>
-                </ul>
-            </nav>
-            <button class="open-dropdown row-container image-btn">
-                <img src="./assets/down-arrow.png" alt="Open projects menu">
-                <h3>Projects</h3>
-            </button>
-            <nav id="projects">
-                <ul>
-                    <li class="project row-container">
-                        <div class="row-container">
-                            <img class="circle" src="./assets/circle.png" alt="">
-                            <span>Project 1</span>
-                        </div>
-                        <span class="project-tasks-count">26</span>
-                    </li>
-                    <li class="project row-container">
-                        <div class="row-container">
-                            <img class="circle" src="./assets/circle.png" alt="">
-                            <span>Project 1</span>
-                        </div>
-                        <span class="project-tasks-count">26</span>
-                    </li>
-                    <li class="project row-container">
-                        <div class="row-container">
-                            <img class="circle" src="./assets/circle.png" alt="">
-                            <span>Projectfabcdefghijklmnop</span>
-                        </div>
-                        <span class="project-tasks-count">26</span>
-                    </li>
-                </ul>
-            </nav>
-            <footer>Made with love by <a href="https://github.com/twentysixhugs" target="_blank">twentysixhugs</a> :3</footer>
+        <aside class="col-container">
+            <div class="col-container">
+                <nav class="col-container" id="main-projects">
+                    <ul>
+                        <li class="project row-container">
+                            <div class="row-container">
+                                <img class="project-icon" src="./assets/inbox.png" alt="">
+                                <span class="project-name">Inbox</span>
+                            </div>
+                            <span class="project-tasks-count">26</span>
+                        </li>
+                        <li class="project row-container">
+                            <div class="row-container">
+                                <img class="project-icon" src="./assets/today.png" alt="">
+                                <span class="project-name" id="today-project">Today</span>
+                            </div>
+                            <span class="project-tasks-count">4</span>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="open-dropdown row-container image-btn">
+                    <img src="./assets/down-arrow.png" alt="Open projects menu">
+                    <h3>Projects</h3>
+                </button>
+            </div>
+            <div class="col-container">
+                <nav id="projects">
+                    <ul>
+                        <li class="project row-container">
+                            <div class="row-container">
+                                <img class="circle" src="./assets/circle.png" alt="">
+                                <span>Project 1</span>
+                            </div>
+                            <span class="project-tasks-count">26</span>
+                        </li>
+                        <li class="project row-container">
+                            <div class="row-container">
+                                <img class="circle" src="./assets/circle.png" alt="">
+                                <span>Project 1</span>
+                            </div>
+                            <span class="project-tasks-count">26</span>
+                        </li>
+                        <li class="project row-container">
+                            <div class="row-container">
+                                <img class="circle" src="./assets/circle.png" alt="">
+                                <span>Projectfabcdefghijklmnop</span>
+                            </div>
+                            <span class="project-tasks-count">26</span>
+                        </li>
+                        
+                    </ul>
+                </nav>
+                <footer>Made with love by <a href="https://github.com/twentysixhugs" target="_blank">twentysixhugs</a> :3</footer>
+            </div>
         </aside>
+        <div class="col-container" id="project-content">
+            <h1>Today</h1>
+            <div id="project-tasks">
+
+            </div>
+        </div>
     </div>
     <script src="./main.js"></script>
 </body>

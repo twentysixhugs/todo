@@ -1,4 +1,4 @@
-import {dataFormatter} from "./utils.js"
+import {DateFormatter} from "./utils.js"
 
 const UILoader = (function() {
     const initialLoad = function(container, node) {
@@ -31,7 +31,7 @@ const UILoader = (function() {
                 }, {capture: true});
             })
         })();
-
+        //rewrite with constructors
         function _createProject(name, color, tasksCount) {
             const li = document.createElement("li");
             li.classList.add("project", "row-container");
@@ -86,7 +86,7 @@ const UILoader = (function() {
     })();
 
     const ProjectWindow = (function() {
-        function display(projectName) {
+        function _displayWindow(projectName) {
             const projectContent = document.querySelector("#project-content");
             _removeAllChildNodes(projectContent);
             // projectContent.textContent = "";
@@ -102,9 +102,7 @@ const UILoader = (function() {
             projectHeader.appendChild(projectNameHeading);
 
             if (projectName === "Today") {
-                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-                const today = dataFormatter.format(new Date());
+                const today = DateFormatter.format(new Date());
 
                 const span = document.createElement("span");
                 span.id = "project-current-date";
@@ -112,15 +110,136 @@ const UILoader = (function() {
                 projectHeader.appendChild(span)
             }
 
+            const tasksContainer = _createContainer("col");
+            tasksContainer.id = "project-tasks";
+
             projectContent.appendChild(projectHeader);
+            projectContent.appendChild(tasksContainer);
         }
 
-        function _createTask(task) {
+        function _createTask(taskData) {
+            const _task = _createContainer("row");
+            _task.classList.add("task");
+            _task.dataset.project = taskData.project;
+            _task.dataset.index = taskData.index;
+
+
+            const _taskMain = _createContainer("row");
+            _taskMain.classList.add("task-main");
+
+
+            const _completeTaskBtn = document.createElement("button");
+            _completeTaskBtn.classList.add("complete-task-btn", `task-priority-${taskData.priority}`);
+
+            const _taskContent = _createContainer("col");
+            _taskContent.classList.add("task-content");
+
+            const _taskName = document.createElement("h2");
+            _taskName.classList.add("task-name");
+            _taskName.textContent = taskData.title;
+
+            const _taskDescription = document.createElement("p");
+            _taskDescription.classList.add("task-description");
+            _taskDescription.textContent = taskData.description;
+
+            const _taskDate = _createContainer("row");
+            _taskDate.classList.add("task-date");
+
+            const _calendarImg = document.createElement("img");
+            _calendarImg.src = "./assets/calendar.png";
+            _calendarImg.alt = "";
+
+            const _dateText = document.createElement("span");
+
+
+            if (taskData.date) {
+                const currentDate = DateFormatter.format(new Date());
+                const taskDate = DateFormatter.format(new Date(taskData.date));
+
+                if (taskDate === currentDate) {
+                    _dateText.classList.add("today-text");
+                    _dateText.textContent = "Today";
+                    
+                    _taskDate.appendChild(_calendarImg);
+                } else {
+                    _dateText.textContent = taskData.date;
+                }
+            }
+
+            const _leftSection = _createContainer("col");
+            const _prioritySelection = document.createElement("nav");
+            _prioritySelection.classList.add("priority-selection", "row-container");
+
+            /* Create three priority buttons and append parent with them*/
+            for (let i = 3; i > 0; i--) {
+                const btn = document.createElement("button");
+                btn.classList.add("priority-btn", `priority-${i}`, "image-btn");
+                
+                const priorityPic = document.createElement("img");
+                priorityPic.src = "./assets/flag.png";
+                priorityPic.alt = `set priority ${i}`;
+
+                // btn.addEventListener('click', () => {
+                //     if (priorityPic.classList.contains("selected")) {
+                //         /* Toggle selected flag picture */
+                //         priorityPic.classList.toggle("selected");
+                //         priorityPic.src = "./assets/flag.png"
+                //     } else {
+                //         priorityPic.classList.toggle("selected");
+                //         priorityPic.src = "./assets/flag-selected.png"
+                //     }
+                    
+                // }, {capture: true});
+
+                btn.appendChild(priorityPic);
+
+                _prioritySelection.appendChild(btn);
+            }
+
+            _task.appendChild(_taskMain);
+                _taskMain.appendChild(_completeTaskBtn);
+                _taskMain.appendChild(_taskContent);
+                    _taskContent.appendChild(_taskName);
+                    if (_taskDescription.textContent) _taskContent.appendChild(_taskDescription);
+                    _taskContent.appendChild(_taskDate);
+                        _taskDate.appendChild(_dateText);
+            _task.appendChild(_leftSection);
+                _leftSection.appendChild(_prioritySelection);
+
+            return _task;
+        }
+
+        function _displayProjectTasks(tasksData) {
 
         }
 
-        function addTask(task) {
+        function _displayTasks(tasksData, todayIsOpened) {
+            tasksData.forEach(taskData => {
+                const taskFromData = _createTask(taskData);
+                _showTask(taskFromData);
+            });
 
+            if (todayIsOpened) {
+                tasksData.forEach(taskData => {
+                    const taskProject = taskData.project;
+                    _showTaskProject(taskProject);
+                })
+            }
+        }
+
+        function _showTaskProject(taskProject) {
+            // console.log("show " + taskProject); works
+        }
+
+        function _showTask(task) {
+            const tasksContainer = document.querySelector("#project-tasks");
+
+            tasksContainer.appendChild(task);
+        }
+
+        function display(projectName, tasksData) {
+            _displayWindow(projectName);   
+            _displayTasks(tasksData, projectName === "Today");
         }
 
         return {display};

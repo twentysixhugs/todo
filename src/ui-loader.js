@@ -69,11 +69,18 @@ const UILoader = (function() {
             projectsList.appendChild(project);
         }
 
-        return {addProject};
+        function toggleShow() {
+            const sidebar = document.querySelector("#sidebar");
+            sidebar.classList.toggle("hidden");
+        }
+
+        return {addProject, toggleShow};
     })();
 
     const Header = (function() {
-        
+        //build toggle sidebar button, wire it to the private method of Sidebar
+        const toggleSidebarBtn = document.querySelector("#toggle-sidebar");
+        toggleSidebarBtn.addEventListener('click', () => {Sidebar.toggleShow()});
     })();
 
     const ProjectWindow = (function() {
@@ -110,7 +117,7 @@ const UILoader = (function() {
         return {display};
     })();
 
-    return {Sidebar};
+    return {Sidebar, Header, ProjectWindow};
 })();
 
 export default UILoader;

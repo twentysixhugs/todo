@@ -19,7 +19,7 @@ const UILoader = (function() {
     }
 
     const Sidebar = (function() {
-        function _createProject(name, tasksCount, index) {
+        function _createProject(name, tasksCount) {
             const li = document.createElement("li");
             li.classList.add("project", "row-container");
             li.dataset.project = name;
@@ -49,8 +49,8 @@ const UILoader = (function() {
             return li;
         }
 
-        function addProject(name, color, tasksCount) {
-            const project = _createProject(name, color, tasksCount);
+        function addProject(name, tasksCount) {
+            const project = _createProject(name, tasksCount);
 
             const projectsList = document.querySelector("#projects ul");
             projectsList.appendChild(project);

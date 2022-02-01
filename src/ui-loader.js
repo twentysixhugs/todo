@@ -19,25 +19,10 @@ const UILoader = (function() {
     }
 
     const Sidebar = (function() {
-        (function addEventsToDefaultProjects () {
-            const defaultProjects = document.querySelectorAll("#main-projects .project");
-
-            defaultProjects.forEach(project => {
-                project.addEventListener('click', (e) => {
-                    // e.stopPropagation();
-
-                    const projectName = e.currentTarget.dataset.project;
-                    ProjectWindow.display(projectName);
-                }, {capture: true});
-            })
-        })();
-        //rewrite with constructors
-        function _createProject(name, color, tasksCount) {
+        function _createProject(name, tasksCount, index) {
             const li = document.createElement("li");
             li.classList.add("project", "row-container");
             li.dataset.project = name;
-
-            li.addEventListener('click', () => {ProjectWindow.display(name)});
 
             const container = _createContainer("row");
 
@@ -76,7 +61,30 @@ const UILoader = (function() {
             sidebar.classList.toggle("hidden");
         }
 
-        return {addProject, toggleShow};
+        function addEventsToCreatedProjects (projectsData) {
+            for (const project in projectsData) {
+                const correspondingProjectNode = document.querySelector(`.project[data-project="${projectsData[project].name}"]`);
+
+                correspondingProjectNode.addEventListener('click', () => {
+                    ProjectWindow.display(projectsData[project].name, projectsData[project].tasks)
+                });
+            }
+        }
+
+        function addEventsToDefaultProjects () {
+            const defaultProjects = document.querySelectorAll("#main-projects .project");
+
+            defaultProjects.forEach(project => {
+                project.addEventListener('click', (e) => {
+                    // e.stopPropagation();
+
+                    const projectName = e.currentTarget.dataset.project;
+                    ProjectWindow.display(projectName);
+                }, {capture: true});
+            })
+        };
+
+        return {addProject, toggleShow, addEventsToCreatedProjects};
     })();
 
     const Header = (function() {

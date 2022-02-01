@@ -325,7 +325,7 @@ a {
     padding: 8px;
 
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 
     border-radius: 6px;
     cursor:default;
@@ -398,7 +398,7 @@ a {
 }
 
 .complete-task-btn.task-priority-2:hover {
-    background: #66470021;
+    background: #be850021;
 }
 
 .complete-task-btn.task-priority-3:hover {

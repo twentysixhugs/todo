@@ -10,15 +10,23 @@ const UILoader = (function() {
         return container;
     }
 
+    const _removeAllChildNodes = function(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
     const Sidebar = (function() {
         (function addEventsToDefaultProjects () {
             const defaultProjects = document.querySelectorAll("#main-projects .project");
 
             defaultProjects.forEach(project => {
                 project.addEventListener('click', (e) => {
-                    const projectName = e.target.dataset.project;
+                    // e.stopPropagation();
+
+                    const projectName = e.currentTarget.dataset.project;
                     ProjectWindow.display(projectName);
-                });
+                }, {capture: true});
             })
         })();
 
@@ -69,23 +77,29 @@ const UILoader = (function() {
     })();
 
     const ProjectWindow = (function() {
-        function display(name) {
+        function display(projectName) {
             const projectContent = document.querySelector("#project-content");
-            const projectHeader = document.querySelector("#project-header");
+            _removeAllChildNodes(projectContent);
+            // projectContent.textContent = "";
 
-            projectContent.textContent = "";
-            projectHeader.textContent = "";
+            const projectHeader = document.createElement("header");
+            projectHeader.id = "project-header";
+            projectHeader.classList.add("row-container");
+           
+            const projectNameHeading = document.createElement("h1");
+            projectNameHeading.id = "project-name-heading";
+            projectNameHeading.textContent = projectName;
 
-            projectHeader.firstChild().textContent = name; // project name at the top
+            projectHeader.appendChild(projectNameHeading);
 
-            if (name === Today) {
+            if (projectName === "Today") {
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
                 const fullDate = new Date();
                 const today = `${months[fullDate.getMonth() - 1]} ${fullDate.getDay()}, ${fullDate.getFullYear()}`;
 
                 const span = document.createElement("span");
-                span.id = "project-current-day";
+                span.id = "project-current-date";
                 span.textContent = today;
                 projectHeader.appendChild(span)
             }

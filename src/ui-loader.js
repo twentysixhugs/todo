@@ -1,5 +1,7 @@
+import {dataFormatter} from "./utils.js"
+
 const UILoader = (function() {
-    const load = function(container, node) {
+    const initialLoad = function(container, node) {
         
     }
     
@@ -102,8 +104,7 @@ const UILoader = (function() {
             if (projectName === "Today") {
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-                const fullDate = new Date();
-                const today = `${months[fullDate.getMonth() - 1]} ${fullDate.getDay()}, ${fullDate.getFullYear()}`;
+                const today = dataFormatter.format(new Date());
 
                 const span = document.createElement("span");
                 span.id = "project-current-date";
@@ -112,6 +113,14 @@ const UILoader = (function() {
             }
 
             projectContent.appendChild(projectHeader);
+        }
+
+        function _createTask(task) {
+
+        }
+
+        function addTask(task) {
+
         }
 
         return {display};

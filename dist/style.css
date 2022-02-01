@@ -144,6 +144,12 @@ aside {
     background: #f6f6f6;
 
     overflow-x: hidden;
+    transition: all .5s;
+}
+
+aside.hidden {
+    transform: translateX(-100%);
+    
 }
 
 aside:hover {

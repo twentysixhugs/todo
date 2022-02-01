@@ -117,11 +117,11 @@ const UILoader = (function() {
             projectContent.appendChild(tasksContainer);
         }
 
-        function _createTask(taskData) {
+        function _createTask(taskInfo) {
             const _task = _createContainer("row");
             _task.classList.add("task");
-            _task.dataset.project = taskData.project;
-            _task.dataset.index = taskData.index;
+            _task.dataset.project = taskInfo.project;
+            _task.dataset.index = taskInfo.index;
 
 
             const _taskMain = _createContainer("row");
@@ -129,18 +129,18 @@ const UILoader = (function() {
 
 
             const _completeTaskBtn = document.createElement("button");
-            _completeTaskBtn.classList.add("complete-task-btn", `task-priority-${taskData.priority}`);
+            _completeTaskBtn.classList.add("complete-task-btn", `task-priority-${taskInfo.priority}`);
 
             const _taskContent = _createContainer("col");
             _taskContent.classList.add("task-content");
 
             const _taskName = document.createElement("h2");
             _taskName.classList.add("task-name");
-            _taskName.textContent = taskData.title;
+            _taskName.textContent = taskInfo.title;
 
             const _taskDescription = document.createElement("p");
             _taskDescription.classList.add("task-description");
-            _taskDescription.textContent = taskData.description;
+            _taskDescription.textContent = taskInfo.description;
 
             const _taskDate = _createContainer("row");
             _taskDate.classList.add("task-date");
@@ -152,9 +152,9 @@ const UILoader = (function() {
             const _dateText = document.createElement("span");
 
 
-            if (taskData.date) {
+            if (taskInfo.date) {
                 const currentDate = DateFormatter.format(new Date());
-                const taskDate = DateFormatter.format(new Date(taskData.date));
+                const taskDate = DateFormatter.format(new Date(taskInfo.date));
 
                 if (taskDate === currentDate) {
                     _dateText.classList.add("today-text");
@@ -162,7 +162,7 @@ const UILoader = (function() {
                     
                     _taskDate.appendChild(_calendarImg);
                 } else {
-                    _dateText.textContent = taskData.date;
+                    _dateText.textContent = taskInfo.date;
                 }
             }
 
@@ -196,6 +196,9 @@ const UILoader = (function() {
                 _prioritySelection.appendChild(btn);
             }
 
+            const projectSection = document.createElement("div"); //used for today, empty in other projects
+            projectSection.classList.add("task-project");
+
             _task.appendChild(_taskMain);
                 _taskMain.appendChild(_completeTaskBtn);
                 _taskMain.appendChild(_taskContent);
@@ -205,30 +208,26 @@ const UILoader = (function() {
                         _taskDate.appendChild(_dateText);
             _task.appendChild(_leftSection);
                 _leftSection.appendChild(_prioritySelection);
+                _leftSection.appendChild(projectSection);
 
             return _task;
         }
 
-        function _displayProjectTasks(tasksData) {
-
-        }
-
         function _displayTasks(tasksData, todayIsOpened) {
-            tasksData.forEach(taskData => {
-                const taskFromData = _createTask(taskData);
-                _showTask(taskFromData);
+            tasksData.forEach(taskInfo => {
+                const taskNode = _createTask(taskInfo);
+                _showTask(taskNode);
+                
+                if (todayIsOpened) {
+                    _showTaskProject(taskInfo.index, taskInfo.project);
+                }
             });
-
-            if (todayIsOpened) {
-                tasksData.forEach(taskData => {
-                    const taskProject = taskData.project;
-                    _showTaskProject(taskProject);
-                })
-            }
         }
 
-        function _showTaskProject(taskProject) {
+        function _showTaskProject(taskIndex, taskProject) {
             // console.log("show " + taskProject); works
+            const container = document.querySelector(`.task[data-index="${taskIndex}"] .task-project`);
+            container.textContent = taskProject;
         }
 
         function _showTask(task) {

@@ -144,7 +144,7 @@ aside {
     background: #f6f6f6;
 
     overflow-x: hidden;
-    transition: all .5s;
+    transition: all .4s;
 }
 
 aside.hidden {
@@ -340,6 +340,7 @@ a {
 }
 
 .task-main h2 {
+    margin-top: 2px;
     margin-bottom: 2px;
 
     font-size: calc(1rem + 2px);

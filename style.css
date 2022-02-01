@@ -366,13 +366,43 @@ a {
     height: 22px;
 
     background: none;
-    border: 2px solid #808080; 
     border-radius: 100%;
 }
 
 .complete-task-btn:hover {
     transition: all 0.2s;
-    background: #dbdbdb;
+}
+
+.complete-task-btn.task-priority-0 {
+    border: 2px solid #808080; 
+}
+
+.complete-task-btn.task-priority-1 {
+    border: 2px solid #008cff; 
+}
+
+.complete-task-btn.task-priority-2 {
+    border: 2px solid #ffae00; 
+}
+
+.complete-task-btn.task-priority-3 {
+    border: 2px solid #df0000; 
+}
+
+.complete-task-btn.task-priority-0:hover {
+    background: #5c5c5c21;
+}
+
+.complete-task-btn.task-priority-1:hover {
+    background: #00366621;
+}
+
+.complete-task-btn.task-priority-2:hover {
+    background: #66470021;
+}
+
+.complete-task-btn.task-priority-3:hover {
+    background: #66000021;
 }
 
 .task-date {
@@ -386,7 +416,9 @@ a {
     height: 15px;
     width: 15px;
 
-    filter: hue-rotate(120deg) brightness(85%) saturate(120%);
+
+    -webkit-filter: hue-rotate(120deg) brightness(85%) saturate(120%);
+            filter: hue-rotate(120deg) brightness(85%) saturate(120%);
 }
 
 .task-date>.today-text {
@@ -408,6 +440,11 @@ a {
 .priority-selection img {
     width: 20px;
     height: 20px;
+}
+
+.priority-selection img.selected {
+    width: 28px;
+    height: 28px;
 }
 
 .priority-btn img{

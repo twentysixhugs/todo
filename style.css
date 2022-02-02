@@ -327,6 +327,16 @@ aside #projects:after
     to { top: 100%; height: 0}
 }
 
+.project>.row-container {
+    text-overflow: "ellipsis";
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.menu-project-name {
+    height: calc(1rem + 2px);
+}
+
 footer {
     margin: 20px 0;
 

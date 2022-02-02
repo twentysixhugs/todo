@@ -1,10 +1,6 @@
 import {DateFormatter} from "./utils.js"
 
 const UILoader = (function() {
-    const initialLoad = function(container, node) {
-        
-    }
-    
     const _createContainer = function(direction) {
         const container = document.createElement('div');
         container.classList.add(`${direction}-container`);
@@ -78,6 +74,19 @@ const UILoader = (function() {
                 ProjectWindow.display("Today", todayTasks);
             });
         }
+
+        (function _enableProjectsDropdown() {
+            const dropdown = document.querySelector("#projects-menu .open-dropdown");
+
+            dropdown.addEventListener('click', () => {
+                const projects = document.querySelector("#projects");
+
+                projects.classList.toggle("hidden");
+
+                const dropdownImg = document.querySelector("#projects-menu .open-dropdown img");
+                dropdownImg.classList.toggle("closed");
+            });
+        })();
 
         return {addProject, toggleShow, addEventsToCreatedProjects, addEventToToday};
     })();

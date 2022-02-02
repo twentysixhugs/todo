@@ -149,7 +149,6 @@ aside {
 
 aside.hidden {
     transform: translateX(-100%);
-    
 }
 
 aside:hover {
@@ -250,6 +249,11 @@ aside ul li.selected {
     height: 12px;
 
     filter: invert(0.2);
+    transition: all .1s;
+}
+
+
+.open-dropdown>img.closed {
     transform: rotate(-90deg);
 }
 
@@ -264,6 +268,63 @@ aside>div:first-child {
 aside>div {
     flex: 4;
     justify-content: space-between;
+}
+
+aside #projects {
+    position: relative;
+    transition: all .3s;
+}
+
+aside #projects.hidden {
+    position: relative;
+}
+
+aside #projects.hidden:after
+{
+    content: '';
+    position: absolute;
+    left:0;
+    right:0;
+    top:100%;
+    bottom:0;
+    z-index:1;
+
+    width: 100%;
+    height: 0;
+
+    background: #f6f6f6;
+
+    animation: swipeup 0.5s;
+    animation-fill-mode: forwards;
+}
+
+aside #projects:after
+{
+    content: '';
+    position: absolute;
+    left:0;
+    right:0;
+    top:100%;
+    bottom:0;
+    z-index:1;
+
+    width: 100%;
+    height: 100%;
+
+    background: #f6f6f6;
+
+    animation: swipedown 0.1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes swipeup {
+    from { top: 100%; height: 0}
+    to { top: 0; height: 100%}
+}
+
+@keyframes swipedown {
+    from { top: 0; height: 100%}
+    to { top: 100%; height: 0}
 }
 
 footer {

@@ -350,6 +350,11 @@ footer {
     color: rgb(0, 0, 0);
 
     opacity: 0.7;
+
+    -webkit-user-select: text;
+    -moz-user-select: text;
+     -ms-user-select: text;
+         user-select: text;
 }
 
 a {

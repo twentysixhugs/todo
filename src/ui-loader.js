@@ -254,8 +254,7 @@ const UILoader = (function() {
             });
         }
 
-        function _showTaskProject(taskIndex, taskProject) {
-            // console.log("show " + taskProject); works
+        function _showTaskProject(taskIndex, taskProject) { // shows what project the task is associated with (e.g. in today)
             const container = document.querySelector(`.task[data-index="${taskIndex}"] .task-project`);
             container.textContent = taskProject;
         }

@@ -170,6 +170,7 @@ const UILoader = (function() {
                     
                     _taskDate.appendChild(_calendarImg);
                 } else {
+                    _dateText.classList.add("date-text");
                     _dateText.textContent = taskInfo.date;
                 }
             }

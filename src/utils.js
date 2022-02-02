@@ -1,4 +1,5 @@
 const DateFormatter = (function() {
+    /* Formats date to look like Feb 2, 2022 */
     function format(date) {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -11,11 +12,10 @@ const DateFormatter = (function() {
 //json should have a unique index for tasks, incremented every time a new task is created
 
 const storageUtils = (function () {
-    // const _taskIndex = get last index
 
     const storage = {
         "projectsData": JSON.parse(localStorage.getItem("projectsData")) || {},
-        "Today": JSON.parse(localStorage.getItem("Today")) || []
+        // "Today": JSON.parse(localStorage.getItem("Today")) || []
     }
 
 
@@ -61,9 +61,15 @@ const storageUtils = (function () {
             constructor(title, description, date, priority, project) {
                 this["title"] = title;
                 this["description"] = description;
-                this["date"] = date;
+                this["date"] = DateFormatter.format(new Date(date));
                 this["priority"] = priority;
                 this["project"] = project;
+            }
+
+            setDate(d) {
+                const date =  DateFormatter.format(new Date(d));
+                
+                this["date"] = date;
             }
         }
 
@@ -81,7 +87,26 @@ const storageUtils = (function () {
 
     }
 
-    return {init, addProject, addTask};
+    function getTodayTasks() {
+        const todayTasks = [];
+
+        for (const project in storage["projectsData"]) {
+            const tasks = storage["projectsData"][project]["tasks"];
+
+            tasks.forEach(task => {
+                const today = DateFormatter.format(new Date());
+                const taskDate = task.date;
+
+                if (today === taskDate) {
+                    todayTasks.push(task);
+                }
+            });
+        }
+
+        return todayTasks;
+    }
+
+    return {init, addProject, addTask, getTodayTasks};
 })();
 
 export {DateFormatter, storageUtils};

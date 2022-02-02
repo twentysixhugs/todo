@@ -37,7 +37,6 @@ const UILoader = (function() {
             li.appendChild(container);
             li.appendChild(tasks);
 
-            //Rewrite so that it creates a div. Set border-radius to 100% in css.
             const colorIcon = document.createElement("img");
             colorIcon.classList.add("circle");
             colorIcon.alt = "";
@@ -265,7 +264,65 @@ const UILoader = (function() {
             newTaskBtn.insertAdjacentElement("beforebegin", taskNode);
         }
 
-        function _showProjectNewTaskBtn(projectName) {
+        function _addNewTaskForm(projectName) {
+            const newTaskBtn = document.querySelector(".project-new-task");
+            newTaskBtn.classList.add("hidden");
+            
+            const newTaskForm = document.createElement("form");
+            newTaskForm.classList.add("col-container");
+            newTaskForm.id = "new-task-form";
+
+            const titleInput = document.createElement("input");
+            titleInput.setAttribute("type", "text");
+            titleInput.setAttribute("name", "title");
+            titleInput.setAttribute("id", "title-input");
+
+            const descriptionInput = document.createElement("input");
+            descriptionInput.setAttribute("type", "text");
+            descriptionInput.setAttribute("name", "description");
+            descriptionInput.setAttribute("id", "description-input");
+
+            newTaskBtn.insertAdjacentElement("afterend", newTaskForm);
+            newTaskForm.appendChild(titleInput);
+            newTaskForm.appendChild(descriptionInput);
+
+            const optionsContainer = _createContainer("row");
+
+            if (projectName === "Today") {
+                const projectDate = _createContainer("row");
+                projectDate.classList.add("input-date-today", "task-date");
+
+                const dateText = document.createElement("span");
+                dateText.classList.add("today-text");
+
+                dateText.textContent = "Today";
+
+                projectDate.appendChild(dateText);
+                optionsContainer.appendChild(projectDate);
+
+                const projectSelect = document.createElement("button");
+                projectSelect.type = "button";
+                projectSelect.classList.add("row-container", "new-task-project-select");
+                
+                const dropdownImg = document.createElement("img");
+                dropdownImg.src = "./assets/down-arrow.png";
+
+                const dropdownText = document.createElement("span");
+                dropdownText.textContent = "Inbox";
+                dropdownText.dataset.project = "Inbox";
+
+
+                optionsContainer.appendChild(projectSelect);
+                    projectSelect.appendChild(dropdownImg);
+                    projectSelect.appendChild(dropdownText);
+            } else {
+
+            }
+
+            newTaskForm.appendChild(optionsContainer);
+        }
+
+        function _addProjectNewTaskBtn(projectName) {
             const btn = document.createElement("button");
             btn.classList.add("project-new-task", "image-btn");
             btn.dataset.projectNewTask = projectName;
@@ -289,12 +346,13 @@ const UILoader = (function() {
             btn.addEventListener('click', () => {
                 console.log("hug");
                 // _showTask(_createTask({title: "!!!Test", description: "Test Description", date: "2022-02-02", priority: "0", "project": "Inbox"}));
+                _addNewTaskForm(projectName);
             });
         }
 
         function _displayAll(projectName, tasksData) {
             _displayWindow(projectName);   
-            _showProjectNewTaskBtn(projectName);
+            _addProjectNewTaskBtn(projectName);
             _displayTasks(tasksData, projectName === "Today");
         }
 

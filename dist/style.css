@@ -54,6 +54,11 @@ body {
     flex-direction: column;
 
     font-family: 'Roboto', sans-serif;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 
@@ -369,6 +374,11 @@ a {
 #project-header {
     gap: 8px;
     align-items: flex-end;
+
+    -webkit-user-select: text;
+    -moz-user-select: text;
+     -ms-user-select: text;
+         user-select: text;
 }
 
 #project-header h1 {
@@ -563,4 +573,33 @@ a {
     font-size: calc(1rem - 4px);
 
     color: #808080;
+}
+
+/* New task in project button */
+
+.project-new-task {
+    gap: 8px;
+    align-items: center;
+
+    margin-left: calc(1rem - 6px);
+
+    cursor: pointer;
+}
+
+.project-new-task button {
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 4px;
+}
+
+.project-new-task:hover {
+    color: red;
+}
+
+.project-new-task img {
+    width: 15px;
+    height: 15px;
 }

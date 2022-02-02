@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"> 
     <title>To-do</title>
+    <script src="./main.js" defer></script>
 </head>
 <body>
     <header id="main-header">
@@ -18,18 +19,18 @@
         </nav>
     </header>
     <div class="row-container" id="content">
-        <aside class="col-container">
+        <aside id="sidebar" class="col-container">
             <div class="col-container">
                 <nav class="col-container" id="main-projects">
                     <ul>
-                        <li class="project row-container">
+                        <li class="project row-container" data-project="Inbox">
                             <div class="row-container">
                                 <img class="project-icon" src="./assets/inbox.png" alt="">
                                 <span class="project-name">Inbox</span>
                             </div>
                             <span class="project-tasks-count">26</span>
                         </li>
-                        <li class="project row-container">
+                        <li class="project row-container" data-project="Today">
                             <div class="row-container">
                                 <img class="project-icon" src="./assets/today.png" alt="">
                                 <span class="project-name" id="today-project">Today</span>
@@ -49,27 +50,13 @@
             <div class="col-container">
                 <nav id="projects">
                     <ul>
-                        <li class="project row-container">
+                        <!-- <li class="project row-container">
                             <div class="row-container">
                                 <img class="circle" src="./assets/circle.png" alt="">
-                                <span>Project 1</span>
+                                <span class="menu-project-name">Project 1</span>
                             </div>
                             <span class="project-tasks-count">26</span>
-                        </li>
-                        <li class="project row-container">
-                            <div class="row-container">
-                                <img class="circle" src="./assets/circle.png" alt="">
-                                <span>Project 1</span>
-                            </div>
-                            <span class="project-tasks-count">26</span>
-                        </li>
-                        <li class="project row-container">
-                            <div class="row-container">
-                                <img class="circle" src="./assets/circle.png" alt="">
-                                <span>Projectfabcdefghijklmnop</span>
-                            </div>
-                            <span class="project-tasks-count">26</span>
-                        </li>
+                        </li> -->
                     </ul>
                     
                 </nav>
@@ -82,56 +69,8 @@
                 <span id="project-current-date">Jan 31, 2022</span>
             </header>
             <div class="col-container" id="project-tasks">
-                <div class="task row-container" data-project="inbox" data-index="0">
-                    <div class="task-main row-container">
-                        <button class="complete-task-btn"></button>
-                        <div class="task-content col-container">
-                            <h2 class="task-name">Hug somebody</h3>
-                            <p class="task-description">When you hug people, you feel better</p>
-                            <div class="task-date row-container"><img src="./assets/calendar.png" alt=""><span class="today-text">Today</span></div>
-                        </div>
-                    </div>
-                    <div class="col-container">
-                        <nav class="priority-selection row-container">
-                            <button class="priority-btn priority-3 image-btn">
-                                <img src="./assets/flag.png" alt="set priority 3">
-                            </button>
-                            <button class="priority-btn priority-2 image-btn">
-                                <img src="./assets/flag.png" alt="set priority 2">
-                            </button>
-                            <button class="priority-btn priority-1 image-btn">
-                                <img src="./assets/flag.png" alt="set priority 1">
-                            </button>
-                        </nav>
-                        <div class="task-project">Inbox</div>
-                    </div>
-                </div>
-                <div class="task row-container" data-project="inbox" data-index="0">
-                    <div class="task-main row-container">
-                        <button class="complete-task-btn"></button>
-                        <div class="task-content col-container">
-                            <h2 class="task-name">Hug somebody</h3>
-                            <div class="task-date row-container"><img src="./assets/calendar.png" alt=""><span class="today-text">Today</span></div>
-                        </div>
-                    </div>
-                    <div class="col-container">
-                        <nav class="priority-selection row-container">
-                            <button class="priority-btn priority-3 image-btn">
-                                <img src="./assets/flag.png" alt="set priority 3">
-                            </button>
-                            <button class="priority-btn priority-2 image-btn">
-                                <img src="./assets/flag.png" alt="set priority 2">
-                            </button>
-                            <button class="priority-btn priority-1 image-btn">
-                                <img src="./assets/flag.png" alt="set priority 1">
-                            </button>
-                        </nav>
-                        <div class="task-project">Inbox</div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-    <script src="./main.js"></script>
 </body>
 </html>

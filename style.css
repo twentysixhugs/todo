@@ -328,7 +328,7 @@ a {
     align-items: center;
 
     border-radius: 6px;
-    cursor:default;
+    cursor: pointer;
 }
 
 .task:hover {

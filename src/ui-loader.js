@@ -17,6 +17,7 @@ const UILoader = (function() {
     }
 
     /* On pageload */
+
     function load() {
 
     }
@@ -74,13 +75,13 @@ const UILoader = (function() {
 
                 const projectName = project.dataset.project;
 					
-                ProjectWindow.display(projectName, projectsData[projectName].tasks);
+                ProjectWindow.initWindow(projectName, projectsData[projectName].tasks);
             });
 
             /* add to inbox manually. it's always present */
             const inbox = document.querySelector('#main-projects .project[data-project="Inbox"]');
             inbox.addEventListener("click", () => {
-                ProjectWindow.display("Inbox", projectsData["Inbox"].tasks);
+                ProjectWindow.initWindow("Inbox", projectsData["Inbox"].tasks);
             })
         }
 
@@ -88,7 +89,7 @@ const UILoader = (function() {
             const todayButton = document.querySelector('.project[data-project="Today"]');
 
             todayButton.addEventListener('click', () => {
-                ProjectWindow.display("Today", todayTasks);
+                ProjectWindow.initWindow("Today", todayTasks);
             });
         }
 
@@ -282,14 +283,31 @@ const UILoader = (function() {
                 btn.appendChild(btnLabel);
 
         }
+        
+        function _initNewTaskBtn(projectName) {
+            const btn = document.querySelector(".project-new-task");
 
-        function display(projectName, tasksData) {
+            btn.addEventListener('click', () => {
+                console.log("hug");
+            });
+        }
+
+        function _display(projectName, tasksData) {
             _displayWindow(projectName);   
             _displayTasks(tasksData, projectName === "Today");
             _showProjectNewTaskBtn(projectName);
         }
 
-        return {display};
+        function _initEvents(projectName, tasksData) {
+            _initNewTaskBtn(projectName);
+        }
+
+        function initWindow(projectName, tasksData) {
+            _display(projectName, tasksData);
+            _initEvents(projectName, tasksData);
+        }
+
+        return {initWindow};
     })();
 
     return {Sidebar, Header, ProjectWindow, load};

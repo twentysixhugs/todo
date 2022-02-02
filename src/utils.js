@@ -1,4 +1,4 @@
-const dataFormatter = (function() {
+const DateFormatter = (function() {
     function format(date) {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -8,4 +8,4 @@ const dataFormatter = (function() {
     return {format};
 })();
 
-export {dataFormatter};
+export {DateFormatter};

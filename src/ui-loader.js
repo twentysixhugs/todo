@@ -57,14 +57,24 @@ const UILoader = (function() {
             sidebar.classList.toggle("hidden");
         }
 
-        function addEventsToCreatedProjects (projectsData) {
-            for (const project in projectsData) {
-                const correspondingProjectNode = document.querySelector(`.project[data-project="${projectsData[project].name}"]`);
+        function addEventsToProjects (projectsData) {
 
-                correspondingProjectNode.addEventListener('click', () => {
-                    ProjectWindow.display(projectsData[project].name, projectsData[project].tasks)
-                });
-            }
+            /* use event delegation for all user-created sidebar projects */
+            const projectsList = document.querySelector("#projects ul");
+            projectsList.addEventListener("click", (e) => {
+                const project = e.target.closest(".project");
+				if (!project) return;
+
+                const projectName = project.dataset.project;
+					
+                ProjectWindow.display(projectName, projectsData[projectName].tasks);
+            });
+
+            /* add to inbox manually. it's always present */
+            const inbox = document.querySelector('#main-projects .project[data-project="Inbox"]');
+            inbox.addEventListener("click", () => {
+                ProjectWindow.display("Inbox", projectsData["Inbox"].tasks);
+            })
         }
 
         function addEventToToday(todayTasks) {
@@ -88,7 +98,7 @@ const UILoader = (function() {
             });
         })();
 
-        return {addProject, toggleShow, addEventsToCreatedProjects, addEventToToday};
+        return {addProject, toggleShow, addEventsToProjects, addEventToToday};
     })();
 
     const Header = (function() {

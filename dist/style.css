@@ -583,21 +583,17 @@ a {
 /* New task in project button */
 
 .project-new-task {
-    gap: 8px;
+    gap: 14px;
     align-items: center;
 
-    margin-left: calc(1rem - 6px);
+    padding: 11px;
 
     cursor: pointer;
 }
 
-.project-new-task button {
-    width: 20px;
-    height: 20px;
+.project-new-task {
+    height: 25px;
     align-items: center;
-    justify-content: center;
-    
-    border-radius: 4px;
 }
 
 .project-new-task:hover {
@@ -605,6 +601,6 @@ a {
 }
 
 .project-new-task img {
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
 }

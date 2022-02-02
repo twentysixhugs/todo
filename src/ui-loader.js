@@ -71,20 +71,15 @@ const UILoader = (function() {
             }
         }
 
-        function addEventsToDefaultProjects () {
-            const defaultProjects = document.querySelectorAll("#main-projects .project");
+        function addEventToToday(todayTasks) {
+            const todayButton = document.querySelector('.project[data-project="Today"]');
 
-            defaultProjects.forEach(project => {
-                project.addEventListener('click', (e) => {
-                    // e.stopPropagation();
+            todayButton.addEventListener('click', () => {
+                ProjectWindow.display("Today", todayTasks);
+            });
+        }
 
-                    const projectName = e.currentTarget.dataset.project;
-                    ProjectWindow.display(projectName);
-                }, {capture: true});
-            })
-        };
-
-        return {addProject, toggleShow, addEventsToCreatedProjects};
+        return {addProject, toggleShow, addEventsToCreatedProjects, addEventToToday};
     })();
 
     const Header = (function() {

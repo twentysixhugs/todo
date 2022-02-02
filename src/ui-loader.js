@@ -260,10 +260,9 @@ const UILoader = (function() {
             container.textContent = taskProject;
         }
 
-        function _showTask(task) {
-            const tasksContainer = document.querySelector("#project-tasks");
-
-            tasksContainer.appendChild(task);
+        function _showTask(taskNode) {
+            const newTaskBtn = document.querySelector(".project-new-task");
+            newTaskBtn.insertAdjacentElement("beforebegin", taskNode);
         }
 
         function _showProjectNewTaskBtn(projectName) {
@@ -289,13 +288,14 @@ const UILoader = (function() {
 
             btn.addEventListener('click', () => {
                 console.log("hug");
+                // _showTask(_createTask({title: "!!!Test", description: "Test Description", date: "2022-02-02", priority: "0", "project": "Inbox"}));
             });
         }
 
-        function _display(projectName, tasksData) {
+        function _displayAll(projectName, tasksData) {
             _displayWindow(projectName);   
-            _displayTasks(tasksData, projectName === "Today");
             _showProjectNewTaskBtn(projectName);
+            _displayTasks(tasksData, projectName === "Today");
         }
 
         function _initEvents(projectName, tasksData) {
@@ -303,7 +303,7 @@ const UILoader = (function() {
         }
 
         function initWindow(projectName, tasksData) {
-            _display(projectName, tasksData);
+            _displayAll(projectName, tasksData);
             _initEvents(projectName, tasksData);
         }
 

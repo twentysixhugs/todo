@@ -147,11 +147,11 @@ const UILoader = (function() {
             projectContent.appendChild(tasksContainer);
         }
 
-        function _createTask(taskInfo) {
+        function _createTask(taskInfo, index) {
             const _task = _createContainer("row");
             _task.classList.add("task");
             _task.dataset.project = taskInfo.project;
-            _task.dataset.index = taskInfo.index;
+            _task.dataset.index = index;
 
 
             const _taskMain = _createContainer("row");
@@ -245,12 +245,12 @@ const UILoader = (function() {
         }
 
         function _displayTasks(tasksData, todayIsOpened) {
-            tasksData.forEach(taskInfo => {
-                const taskNode = _createTask(taskInfo);
+            tasksData.forEach((taskInfo, i) => {
+                const taskNode = _createTask(taskInfo, i);
                 _showTask(taskNode);
                 
                 if (todayIsOpened) {
-                    _showTaskProject(taskInfo.index, taskInfo.project);
+                    _showTaskProject(i, taskInfo.project);
                 }
             });
         }

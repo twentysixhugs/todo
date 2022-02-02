@@ -421,6 +421,10 @@ a {
             filter: hue-rotate(120deg) brightness(85%) saturate(120%);
 }
 
+.task-date>.date-text {
+    opacity: 0.6;
+}
+
 .task-date>.today-text {
     color: rgb(199, 42, 199);
 }

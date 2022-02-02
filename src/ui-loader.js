@@ -1,6 +1,8 @@
 import {DateFormatter} from "./utils.js"
 
 const UILoader = (function() {
+
+    /* Utility functions */
     const _createContainer = function(direction) {
         const container = document.createElement('div');
         container.classList.add(`${direction}-container`);
@@ -12,6 +14,11 @@ const UILoader = (function() {
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild);
         }
+    }
+
+    /* On pageload */
+    function load() {
+
     }
 
     const Sidebar = (function() {
@@ -259,15 +266,34 @@ const UILoader = (function() {
             tasksContainer.appendChild(task);
         }
 
+        function _showProjectNewTaskBtn(projectName) {
+            const btn = document.createElement("button");
+            btn.classList.add("project-new-task", "image-btn");
+            btn.dataset.projectNewTask = projectName;
+
+            const img = document.createElement("img");
+            img.src = "./assets/plus-red.png"; 
+
+            const btnLabel = document.createElement("span");
+            btnLabel.textContent = "Add task";
+
+            const projectTasksContainer = document.querySelector("#project-tasks");
+            projectTasksContainer.appendChild(btn);
+                btn.appendChild(img);
+                btn.appendChild(btnLabel);
+
+        }
+
         function display(projectName, tasksData) {
             _displayWindow(projectName);   
             _displayTasks(tasksData, projectName === "Today");
+            _showProjectNewTaskBtn(projectName);
         }
 
         return {display};
     })();
 
-    return {Sidebar, Header, ProjectWindow};
+    return {Sidebar, Header, ProjectWindow, load};
 })();
 
 export default UILoader;

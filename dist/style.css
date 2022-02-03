@@ -1,3 +1,8 @@
+/* When I was building it, I only started to learn to write more or less clean CSS and HTML Code */
+/* To that end, there are many long, chained and completely unreadable selectors */
+/* that I'm aware of. However, instead of rewriting, I chose to go forward and */
+/* make sure I don't repeat such mistakes in the future. */
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -541,32 +546,32 @@ a {
     transition: all 0.1s;
 }
 
-.priority-btn.priority-1 img {
+.img-priority-1 {
     -webkit-filter: hue-rotate(175deg) brightness(84%);
             filter: hue-rotate(175deg) brightness(84%);       
 }
 
-.priority-btn.priority-2 img {
+.img-priority-2 {
     -webkit-filter: hue-rotate(350deg) brightness(94%);
         filter: hue-rotate(350deg) brightness(94%);   
 }
 
-.priority-btn.priority-3 img {
+.img-priority-3 {
     -webkit-filter: hue-rotate(307deg) brightness(79%);
         filter: hue-rotate(307deg) brightness(79%);   
 }
 
-.priority-btn.priority-1 img:hover {
+.img-priority-1:hover {
     -webkit-filter: hue-rotate(175deg) brightness(60%);
             filter: hue-rotate(175deg) brightness(60%);       
 }
 
-.priority-btn.priority-2 img:hover {
+.img-priority-2:hover {
     -webkit-filter: hue-rotate(350deg) brightness(70%);
             filter: hue-rotate(350deg) brightness(70%);       
 }
 
-.priority-btn.priority-3 img:hover {
+.img-priority-3:hover {
     -webkit-filter: hue-rotate(307deg) brightness(55%);
             filter: hue-rotate(307deg) brightness(55%);       
 }
@@ -580,120 +585,114 @@ a {
     color: #808080;
 }
 
-/* New task in project button */
-
-.project-new-task {
-    gap: 14px;
-    align-items: center;
-
-    padding: 11px;
-
-    cursor: pointer;
-}
-
-.project-new-task {
-    height: 25px;
-    align-items: center;
-}
-
-.project-new-task:hover {
-    color: red;
-}
-
-.project-new-task img {
-    width: 17px;
-    height: 17px;
-}
-
-.project-new-task.hidden {
-    display: none;
-}
 
 /* New task form */
 
-#project-tasks #new-task-form {
-    padding: 8px 16px 12px 16px;
+/* Form's background */
+.new-task {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1; /* Sit on top of everything else */
 
+    display: none; 
+    padding-top: 100px; /* Move the form itself */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+
+    background-color: rgba(0,0,0,0.4);
+
+    overflow: auto; /* Enable scroll */
+}
+
+.new-task.show {
+    display: block;
+}
+
+/* Form's content */  
+.form-new-task {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+
+    background: #fefefe;
     border: 1px solid #cecece;
     border-radius: 6px;
 }
 
-#project-tasks #title-input,
-#project-tasks #description-input,
-#project-tasks #description-input+.row-container {
-
-    height: 2rem;
-
-    font-size: 1rem;
-
-    border: none;
+.new-task-data-fieldset {
+    width: 100%;
 }
 
-#project-tasks #description-input+.row-container {
-    margin-top: 8px;
-    gap: 8px; /* Gap between date and project input (if exists) */
+.new-task-title,
+.new-task-description {
+    padding: 4px;
 }
 
-#project-tasks #title-input:focus,
-#project-tasks #description-input:focus {
+.new-task-title:focus,
+.new-task-description:focus {
     outline: none;
 }
 
-#project-tasks #new-task-form button,
-#project-tasks #new-task-form .task-date {
-    padding: 4px;
-
-    justify-content: center;
-    align-items: center;
-
-    font-size: 1rem;
-
-    border: 1px solid #cecece;
-    border-radius: 6px;
-    background: transparent;
+.date-new-task {
+    color: #808080;
 }
 
-#project-tasks #new-task-form *.clickable:hover {
-    background: rgb(243, 238, 238)
+.new-task-form-actions {
+    margin-top: 12px;
+    gap: 12px;
 }
 
-#project-tasks #new-task-form .task-date.unclickable .today-text {
-    color: rgb(199, 120, 199);
-}
-
-#project-tasks #new-task-form .task-date.unclickable {
-    border-color:#e4e4e4;
-}
-
-#project-tasks #task-adding-controls {
-    gap: 8px;
-}
-
-#project-tasks #task-adding-controls button {
+.new-task-confirm,
+.new-task-cancel {
     padding: 10px;
-    
     border-radius: 6px;
 }
-
-#project-tasks #task-adding-controls #confirm-task-add-btn:disabled {
+.new-task-confirm {
     color: #fff;
-    background: #f1b7b2;
 
-    cursor: default;
-}
-
-#project-tasks #task-adding-controls #confirm-task-add-btn:enabled {
-    color: #fff;
     background: #dc4c3e;
 
+    transition: all .1s;
+}
+
+.new-task-confirm:hover {
+    background: #af3c31;
+}
+
+.new-task-cancel {
+    border: 1px solid #d3d3d3;
+    background: #ffffff;
+
+    transition: all .1s;
+}
+
+.new-task-cancel:hover {
+    background: #e4e4e4;
+}
+
+.close-and-priority {
+    justify-content: space-between;
+    float: right;
+}
+
+.close-new-task-form {
+    width: 25px;
+    height: 25px;
+    margin-right: 9px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+
+    font-size: 24px;
+
+    color: #808080;
+    
     cursor: pointer;
 }
 
-#project-tasks #task-adding-controls #cancel-task-add-btn {
-    background: transparent;
-    border: 1px solid #cecece;
-}
-
-#project-tasks #task-adding-controls #cancel-task-add-btn:hover {
-    background: #f5f5f5;
+.close-new-task-form:hover {
+    color: #555555;
 }

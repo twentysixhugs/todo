@@ -42,19 +42,26 @@ const UILoader = (function() {
         fieldSet.classList.add("new-task-data-fieldset", "col-container");
         form.appendChild(fieldSet);
 
+        const closeAndPriority = _createContainer("col");
+        closeAndPriority.classList.add("close-and-priority");
+        form.appendChild(closeAndPriority);
+
         const close = document.createElement("span");
         close.classList.add("close-new-task-form");
-        close.innerText = "×";
-        form.appendChild(close);
+        close.textContent = "×";
+        closeAndPriority.appendChild(close);
+
+        const priority = _createPrioritiesInput();
+        closeAndPriority.appendChild(priority);
 
         const title = document.createElement("input");
         title.setAttribute("type", "text");
         title.setAttribute("placeholder", "Task name")
-        title.classList.add("input-title");
+        title.classList.add("new-task-title");
         fieldSet.appendChild(title);
 
         const description = document.createElement("input");
-        description.classList.add("input-description");
+        description.classList.add("new-task-description");
         description.setAttribute("type", "text");
         description.setAttribute("placeholder", "Description");
         fieldSet.appendChild(description);
@@ -77,20 +84,21 @@ const UILoader = (function() {
         project.classList.add("project-new-task");
         dateProject.appendChild(project);
 
-        const priorities = _createPrioritiesInput();
-        extraProps.appendChild(priorities);
-
         const formActions = _createContainer("row");
         formActions.classList.add("new-task-form-actions");
         fieldSet.appendChild(formActions);
 
+
+        //ADD FORM RESET FOR BOTH AND FOR X AS WELL
         const confirmBtn = document.createElement("button");
         confirmBtn.classList.add("new-task-confirm");
+        confirmBtn.setAttribute("type", "button");
         confirmBtn.textContent = "Add task";
         formActions.appendChild(confirmBtn);
 
         const cancelBtn = document.createElement("button");
         cancelBtn.classList.add("new-task-cancel");
+        cancelBtn.setAttribute("type", "button");
         cancelBtn.textContent = "Cancel";
         formActions.appendChild(cancelBtn);
 

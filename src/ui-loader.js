@@ -305,9 +305,6 @@ const UILoader = (function() {
                 const projectSelect = document.createElement("button");
                 projectSelect.type = "button";
                 projectSelect.classList.add("row-container", "new-task-project-select", "clickable");
-                
-                const dropdownImg = document.createElement("img");
-                dropdownImg.src = "./assets/down-arrow.png";
 
                 const dropdownText = document.createElement("span");
                 dropdownText.textContent = "Inbox";
@@ -315,7 +312,6 @@ const UILoader = (function() {
 
 
                 optionsContainer.appendChild(projectSelect);
-                    projectSelect.appendChild(dropdownImg);
                     projectSelect.appendChild(dropdownText);
             } else {
                 //add clickable class
@@ -327,6 +323,7 @@ const UILoader = (function() {
             controlsContainer.id = "task-adding-controls";
 
             const confirmBtn = document.createElement("button");
+            confirmBtn.disabled = true;
             const cancelBtn = document.createElement("button");
 
             confirmBtn.id = "confirm-task-add-btn";

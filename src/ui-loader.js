@@ -1,3 +1,8 @@
+/* When I was building it, I only started to learn to write more or less clean CSS and HTML Code */
+/* To that end, there are many long, chained and completely unreadable selectors */
+/* that I'm aware of. However, instead of rewriting, I chose to go forward and */
+/* make sure I don't repeat such mistakes in the future. */
+
 import {DateFormatter} from "./utils.js"
 
 const UILoader = (function() {
@@ -19,7 +24,84 @@ const UILoader = (function() {
     /* On pageload */
 
     function load() {
+    }
 
+    /* Forms */
+
+    function _createNewTaskForm() {
+        const form = document.createElement("form");
+        form.classList.add("form-new-task", "col-container");
+
+        const title = document.createElement("input");
+        title.setAttribute("type", "text");
+        title.classList.add("input-title");
+        form.appendChild(title);
+
+        const description = document.createElement("input");
+        description.classList.add("input-description");
+        description.setAttribute("type", "text");
+        form.appendChild(description);
+
+        const extraProps = _createContainer("row");
+        extraProps.classList.add("extra-props-new-task");
+        form.appendChild(extraProps);
+
+        const dateProject = _createContainer("row");
+        dateProject.classList.add("date-project-new-task");
+        extraProps.appendChild(dateProject);
+
+        const date = document.createElement("input");
+        date.setAttribute("type", "date");
+        date.classList.add("date-new-task");
+        dateProject.appendChild(date);
+
+        const project = document.createElement("input");
+        project.setAttribute("type", "button");
+        project.classList.add("project-new-task");
+        dateProject.appendChild(project);
+
+        const priorities = _createPrioritiesInput();
+        extraProps.appendChild(priorities);
+    }
+
+    function _createNewProjectForm() {
+
+    }
+
+    const newTaskForm = _createNewTaskForm();
+    const newProjectForm = _createNewProjectForm();
+
+    function _showNewTaskForm() {
+        
+    }
+
+    function _showNewProjectForm() {
+
+    }
+
+    /* General */
+
+    function _createPrioritiesInput() {
+        const _prioritySelection = document.createElement("nav");
+        _prioritySelection.classList.add("priority-selection", "row-container");
+
+        /* Create three priority buttons and append parent with them*/
+        for (let i = 3; i > 0; i--) {
+            const btn = document.createElement("button");
+            btn.classList.add("priority-btn", `priority-${i}`, "image-btn");
+            btn.setAttribute("type", "button");
+            
+            const priorityPic = document.createElement("img");
+            priorityPic.classList.add(`img-priority-${i}`);
+            priorityPic.src = "./assets/flag.png";
+            priorityPic.alt = `set priority ${i}`;
+
+            btn.appendChild(priorityPic);
+
+            _prioritySelection.appendChild(btn);
+        }
+
+        return _prioritySelection;
     }
 
     const Sidebar = (function() {
@@ -112,6 +194,21 @@ const UILoader = (function() {
         //build toggle sidebar button, wire it to the private method of Sidebar
         const toggleSidebarBtn = document.querySelector("#toggle-sidebar");
         toggleSidebarBtn.addEventListener('click', () => {Sidebar.toggleShow()});
+
+        function _initNewTaskBtn() {
+            const btn = document.querySelector(".new-task");
+
+            btn.addEventListener('click', () => {
+                console.log("hug");
+                _showNewTaskForm();
+            });
+        }
+        
+        function init() {
+            _initNewTaskBtn();
+        }
+
+        return {init};
     })();
 
     const ProjectWindow = (function() {
@@ -197,34 +294,7 @@ const UILoader = (function() {
             }
 
             const _leftSection = _createContainer("col");
-            const _prioritySelection = document.createElement("nav");
-            _prioritySelection.classList.add("priority-selection", "row-container");
-
-            /* Create three priority buttons and append parent with them*/
-            for (let i = 3; i > 0; i--) {
-                const btn = document.createElement("button");
-                btn.classList.add("priority-btn", `priority-${i}`, "image-btn");
-                
-                const priorityPic = document.createElement("img");
-                priorityPic.src = "./assets/flag.png";
-                priorityPic.alt = `set priority ${i}`;
-
-                // btn.addEventListener('click', () => {
-                //     if (priorityPic.classList.contains("selected")) {
-                //         /* Toggle selected flag picture */
-                //         priorityPic.classList.toggle("selected");
-                //         priorityPic.src = "./assets/flag.png"
-                //     } else {
-                //         priorityPic.classList.toggle("selected");
-                //         priorityPic.src = "./assets/flag-selected.png"
-                //     }
-                    
-                // }, {capture: true});
-
-                btn.appendChild(priorityPic);
-
-                _prioritySelection.appendChild(btn);
-            }
+            const _prioritySelection = _createPrioritiesInput();            
 
             const projectSection = document.createElement("div"); //used for today, empty in other projects
             projectSection.classList.add("task-project");
@@ -243,6 +313,7 @@ const UILoader = (function() {
             return _task;
         }
 
+
         function _displayTasks(tasksData, todayIsOpened) {
             tasksData.forEach((taskInfo, i) => {
                 const taskNode = _createTask(taskInfo, i);
@@ -260,123 +331,17 @@ const UILoader = (function() {
         }
 
         function _showTask(taskNode) {
-            const newTaskBtn = document.querySelector(".project-new-task");
-            newTaskBtn.insertAdjacentElement("beforebegin", taskNode);
-        }
-
-        function _addNewTaskForm(projectName) {
-            const newTaskBtn = document.querySelector(".project-new-task");
-            newTaskBtn.classList.add("hidden");
-            
-            const newTaskForm = document.createElement("form");
-            newTaskForm.classList.add("col-container");
-            newTaskForm.id = "new-task-form";
-
-            const titleInput = document.createElement("input");
-            titleInput.setAttribute("type", "text");
-            titleInput.setAttribute("name", "title");
-            titleInput.setAttribute("id", "title-input");
-            titleInput.setAttribute("placeholder", "Task name");
-
-            const descriptionInput = document.createElement("input");
-            descriptionInput.setAttribute("type", "text");
-            descriptionInput.setAttribute("name", "description");
-            descriptionInput.setAttribute("id", "description-input");
-            descriptionInput.setAttribute("placeholder", "Description");
-
-            newTaskBtn.insertAdjacentElement("afterend", newTaskForm);
-            newTaskForm.appendChild(titleInput);
-            newTaskForm.appendChild(descriptionInput);
-
-            const optionsContainer = _createContainer("row");
-
-            if (projectName === "Today") {
-                const projectDate = _createContainer("row");
-                projectDate.classList.add("input-date-today", "task-date", "unclickable");
-
-                const dateText = document.createElement("span");
-                dateText.classList.add("today-text");
-
-                dateText.textContent = "Today";
-
-                projectDate.appendChild(dateText);
-                optionsContainer.appendChild(projectDate);
-
-                const projectSelect = document.createElement("button");
-                projectSelect.type = "button";
-                projectSelect.classList.add("row-container", "new-task-project-select", "clickable");
-
-                const dropdownText = document.createElement("span");
-                dropdownText.textContent = "Inbox";
-                dropdownText.dataset.project = "Inbox";
-
-
-                optionsContainer.appendChild(projectSelect);
-                    projectSelect.appendChild(dropdownText);
-            } else {
-                //add clickable class
-            }
-
-            newTaskForm.appendChild(optionsContainer);
-
-            const controlsContainer = _createContainer("row");
-            controlsContainer.id = "task-adding-controls";
-
-            const confirmBtn = document.createElement("button");
-            confirmBtn.disabled = true;
-            const cancelBtn = document.createElement("button");
-
-            confirmBtn.id = "confirm-task-add-btn";
-            cancelBtn.id = "cancel-task-add-btn";
-
-            confirmBtn.setAttribute("type", "button");
-            cancelBtn.setAttribute("type", "button");
-
-            confirmBtn.textContent = "Add task";
-            cancelBtn.textContent = "Cancel";
-
-            controlsContainer.appendChild(confirmBtn);
-            controlsContainer.appendChild(cancelBtn);
-
-            newTaskForm.insertAdjacentElement("afterend", controlsContainer);
-        }
-
-        function _addProjectNewTaskBtn(projectName) {
-            const btn = document.createElement("button");
-            btn.classList.add("project-new-task", "image-btn");
-            btn.dataset.projectNewTask = projectName;
-
-            const img = document.createElement("img");
-            img.src = "./assets/plus-red.png"; 
-
-            const btnLabel = document.createElement("span");
-            btnLabel.textContent = "Add task";
-
-            const projectTasksContainer = document.querySelector("#project-tasks");
-            projectTasksContainer.appendChild(btn);
-                btn.appendChild(img);
-                btn.appendChild(btnLabel);
-
-        }
-        
-        function _initNewTaskBtn(projectName) {
-            const btn = document.querySelector(".project-new-task");
-
-            btn.addEventListener('click', () => {
-                console.log("hug");
-                // _showTask(_createTask({title: "!!!Test", description: "Test Description", date: "2022-02-02", priority: "0", "project": "Inbox"}));
-                _addNewTaskForm(projectName);
-            });
+            const tasksContainer = document.querySelector("#project-tasks");
+            tasksContainer.appendChild(taskNode);
         }
 
         function _displayAll(projectName, tasksData) {
             _displayWindow(projectName);   
-            _addProjectNewTaskBtn(projectName);
             _displayTasks(tasksData, projectName === "Today");
         }
 
         function _initEvents(projectName, tasksData) {
-            _initNewTaskBtn(projectName);
+            // _initNewTaskBtn(projectName);
         }
 
         function initWindow(projectName, tasksData) {

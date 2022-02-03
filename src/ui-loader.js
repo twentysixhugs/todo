@@ -42,19 +42,21 @@ const UILoader = (function() {
         fieldSet.classList.add("new-task-data-fieldset", "col-container");
         form.appendChild(fieldSet);
 
-        const closeBtn = document.createElement("span");
-        closeBtn.classList.add("close-new-task-form");
-        closeBtn.innerText = "×";
-        form.appendChild(closeBtn);
+        const close = document.createElement("span");
+        close.classList.add("close-new-task-form");
+        close.innerText = "×";
+        form.appendChild(close);
 
         const title = document.createElement("input");
         title.setAttribute("type", "text");
+        title.setAttribute("placeholder", "Task name")
         title.classList.add("input-title");
         fieldSet.appendChild(title);
 
         const description = document.createElement("input");
         description.classList.add("input-description");
         description.setAttribute("type", "text");
+        description.setAttribute("placeholder", "Description");
         fieldSet.appendChild(description);
 
         const extraProps = _createContainer("row");

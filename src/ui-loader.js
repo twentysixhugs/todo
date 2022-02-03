@@ -276,11 +276,13 @@ const UILoader = (function() {
             titleInput.setAttribute("type", "text");
             titleInput.setAttribute("name", "title");
             titleInput.setAttribute("id", "title-input");
+            titleInput.setAttribute("placeholder", "Task name");
 
             const descriptionInput = document.createElement("input");
             descriptionInput.setAttribute("type", "text");
             descriptionInput.setAttribute("name", "description");
             descriptionInput.setAttribute("id", "description-input");
+            descriptionInput.setAttribute("placeholder", "Description");
 
             newTaskBtn.insertAdjacentElement("afterend", newTaskForm);
             newTaskForm.appendChild(titleInput);
@@ -290,7 +292,7 @@ const UILoader = (function() {
 
             if (projectName === "Today") {
                 const projectDate = _createContainer("row");
-                projectDate.classList.add("input-date-today", "task-date");
+                projectDate.classList.add("input-date-today", "task-date", "unclickable");
 
                 const dateText = document.createElement("span");
                 dateText.classList.add("today-text");
@@ -302,7 +304,7 @@ const UILoader = (function() {
 
                 const projectSelect = document.createElement("button");
                 projectSelect.type = "button";
-                projectSelect.classList.add("row-container", "new-task-project-select");
+                projectSelect.classList.add("row-container", "new-task-project-select", "clickable");
                 
                 const dropdownImg = document.createElement("img");
                 dropdownImg.src = "./assets/down-arrow.png";
@@ -316,7 +318,7 @@ const UILoader = (function() {
                     projectSelect.appendChild(dropdownImg);
                     projectSelect.appendChild(dropdownText);
             } else {
-
+                //add clickable class
             }
 
             newTaskForm.appendChild(optionsContainer);

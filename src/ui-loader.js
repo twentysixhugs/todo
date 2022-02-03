@@ -29,8 +29,12 @@ const UILoader = (function() {
     /* Forms */
 
     function _createNewTaskForm() {
+        const background = document.createElement("div");
+        background.classList.add("new-task");
+
         const form = document.createElement("form");
         form.classList.add("form-new-task", "col-container");
+        background.appendChild(form);
 
         const title = document.createElement("input");
         title.setAttribute("type", "text");

@@ -28,27 +28,38 @@ const UILoader = (function() {
 
     /* Forms */
 
+    const newTaskForm = _createNewTaskForm();
+    const newProjectForm = _createNewProjectForm();
+
     function _createNewTaskForm() {
-        const background = document.createElement("div");
-        background.classList.add("new-task");
+        const background = document.querySelector(".new-task");
 
         const form = document.createElement("form");
-        form.classList.add("form-new-task", "col-container");
+        form.classList.add("form-new-task", "row-container");
         background.appendChild(form);
+
+        const fieldSet = document.createElement("fieldset");
+        fieldSet.classList.add("new-task-data-fieldset", "col-container");
+        form.appendChild(fieldSet);
+
+        const closeBtn = document.createElement("span");
+        closeBtn.classList.add("close-new-task-form");
+        closeBtn.innerText = "×";
+        form.appendChild(closeBtn);
 
         const title = document.createElement("input");
         title.setAttribute("type", "text");
         title.classList.add("input-title");
-        form.appendChild(title);
+        fieldSet.appendChild(title);
 
         const description = document.createElement("input");
         description.classList.add("input-description");
         description.setAttribute("type", "text");
-        form.appendChild(description);
+        fieldSet.appendChild(description);
 
         const extraProps = _createContainer("row");
         extraProps.classList.add("extra-props-new-task");
-        form.appendChild(extraProps);
+        fieldSet.appendChild(extraProps);
 
         const dateProject = _createContainer("row");
         dateProject.classList.add("date-project-new-task");
@@ -66,17 +77,30 @@ const UILoader = (function() {
 
         const priorities = _createPrioritiesInput();
         extraProps.appendChild(priorities);
+
+        const formActions = _createContainer("row");
+        formActions.classList.add("new-task-form-actions");
+        fieldSet.appendChild(formActions);
+
+        const confirmBtn = document.createElement("button");
+        confirmBtn.classList.add("new-task-confirm");
+        confirmBtn.textContent = "Add task";
+        formActions.appendChild(confirmBtn);
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.classList.add("new-task-cancel");
+        cancelBtn.textContent = "Cancel";
+        formActions.appendChild(cancelBtn);
+
+        return form;
     }
 
     function _createNewProjectForm() {
 
     }
 
-    const newTaskForm = _createNewTaskForm();
-    const newProjectForm = _createNewProjectForm();
-
     function _showNewTaskForm() {
-        
+        document.querySelector(".new-task").classList.toggle("show");
     }
 
     function _showNewProjectForm() {
@@ -200,7 +224,7 @@ const UILoader = (function() {
         toggleSidebarBtn.addEventListener('click', () => {Sidebar.toggleShow()});
 
         function _initNewTaskBtn() {
-            const btn = document.querySelector(".new-task");
+            const btn = document.querySelector(".new-task-btn");
 
             btn.addEventListener('click', () => {
                 console.log("hug");

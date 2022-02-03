@@ -322,6 +322,26 @@ const UILoader = (function() {
             }
 
             newTaskForm.appendChild(optionsContainer);
+
+            const controlsContainer = _createContainer("row");
+            controlsContainer.id = "task-adding-controls";
+
+            const confirmBtn = document.createElement("button");
+            const cancelBtn = document.createElement("button");
+
+            confirmBtn.id = "confirm-task-add-btn";
+            cancelBtn.id = "cancel-task-add-btn";
+
+            confirmBtn.setAttribute("type", "button");
+            cancelBtn.setAttribute("type", "button");
+
+            confirmBtn.textContent = "Add task";
+            cancelBtn.textContent = "Cancel";
+
+            controlsContainer.appendChild(confirmBtn);
+            controlsContainer.appendChild(cancelBtn);
+
+            newTaskForm.insertAdjacentElement("afterend", controlsContainer);
         }
 
         function _addProjectNewTaskBtn(projectName) {

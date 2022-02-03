@@ -9,8 +9,6 @@ const DateFormatter = (function() {
     return {format};
 })();
 
-//json should have a unique index for tasks, incremented every time a new task is created
-
 const storageUtils = (function () {
 
     const storage = {

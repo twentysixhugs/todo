@@ -443,7 +443,7 @@ a {
 }
 
 .task-main+div {
-    align-self: flex-start;
+    align-self: flex-end;
 }
 
 .task-content {
@@ -522,13 +522,18 @@ a {
 
 .priority-selection {
     gap: 8px;
+
+    margin-bottom: 6px;
+}
+
+.priority-selection > label {
+    width: 100%;
 }
 
 .priority-selection .priority-btn {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 
-    background: none;
     border-radius: 100%;
 }
 
@@ -577,7 +582,7 @@ a {
 }
 
 .task-project {
-    padding-right: 10px;
+    /* padding-right: 10px; */
 
     text-align: end;
     font-size: calc(1rem - 4px);

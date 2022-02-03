@@ -4,6 +4,7 @@
 /* make sure I don't repeat such mistakes in the future. */
 
 import {DateFormatter} from "./utils.js"
+import {storageUtils} from "./utils.js"
 
 const UILoader = (function() {
 
@@ -49,6 +50,12 @@ const UILoader = (function() {
         const close = document.createElement("span");
         close.classList.add("close-new-task-form");
         close.textContent = "×";
+
+        close.addEventListener("click", () => {
+            _toggleNewTaskForm();
+            form.reset();
+        });
+
         closeAndPriority.appendChild(close);
 
         const priority = _createPrioritiesInput();
@@ -94,6 +101,13 @@ const UILoader = (function() {
         confirmBtn.classList.add("new-task-confirm");
         confirmBtn.setAttribute("type", "button");
         confirmBtn.textContent = "Add task";
+
+        confirmBtn.addEventListener("click", () => {
+            //const selectedPriority
+
+            storageUtils.addTask(title.value, description.value, date.value, )
+        });
+
         formActions.appendChild(confirmBtn);
 
         const cancelBtn = document.createElement("button");
@@ -109,11 +123,11 @@ const UILoader = (function() {
 
     }
 
-    function _showNewTaskForm() {
+    function _toggleNewTaskForm() {
         document.querySelector(".new-task").classList.toggle("show");
     }
 
-    function _showNewProjectForm() {
+    function _toggleNewProjectForm() {
 
     }
 
@@ -123,11 +137,28 @@ const UILoader = (function() {
         const _prioritySelection = document.createElement("nav");
         _prioritySelection.classList.add("priority-selection", "row-container");
 
-        /* Create three priority buttons and append parent with them*/
-        for (let i = 3; i > 0; i--) {
-            const btn = document.createElement("button");
+        /* Create priority buttons and append parent with them*/
+        for (let i = 3; i >= 0; i--) {
+            const btn = document.createElement("input");
+            btn.setAttribute("type", "radio");
+            btn.setAttribute("name", "priority");
+            btn.id = "priority";
             btn.classList.add("priority-btn", `priority-${i}`, "image-btn");
-            btn.setAttribute("type", "button");
+
+            const label = document.createElement("label");
+            label.setAttribute("for", "priority");
+            label.textContent = `Priority ${i}`;
+
+            if (i === 0) {
+                btn.setAttribute("checked", "");
+            }
+
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("priority-selected");
+            });
+
+            _prioritySelection.appendChild(label);
+            _prioritySelection.appendChild(btn);
             
             const priorityPic = document.createElement("img");
             priorityPic.classList.add(`img-priority-${i}`);
@@ -135,8 +166,6 @@ const UILoader = (function() {
             priorityPic.alt = `set priority ${i}`;
 
             btn.appendChild(priorityPic);
-
-            _prioritySelection.appendChild(btn);
         }
 
         return _prioritySelection;
@@ -238,7 +267,7 @@ const UILoader = (function() {
 
             btn.addEventListener('click', () => {
                 console.log("hug");
-                _showNewTaskForm();
+                _toggleNewTaskForm();
             });
         }
         
@@ -331,8 +360,7 @@ const UILoader = (function() {
                 }
             }
 
-            const _leftSection = _createContainer("col");
-            const _prioritySelection = _createPrioritiesInput();            
+            const _leftSection = _createContainer("col");   
 
             const projectSection = document.createElement("div"); //used for today, empty in other projects
             projectSection.classList.add("task-project");
@@ -345,7 +373,6 @@ const UILoader = (function() {
                     _taskContent.appendChild(_taskDate);
                         _taskDate.appendChild(_dateText);
             _task.appendChild(_leftSection);
-                _leftSection.appendChild(_prioritySelection);
                 _leftSection.appendChild(projectSection);
 
             return _task;

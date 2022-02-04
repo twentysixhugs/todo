@@ -33,7 +33,7 @@ const UILoader = (function() {
     const newProjectForm = _createNewProjectForm();
 
     function _createNewTaskForm() {
-        const background = document.querySelector(".task-input");
+        const background = document.querySelector(".task-input-background");
 
         const form = document.createElement("form");
         form.classList.add("form-task-input", "row-container");
@@ -124,7 +124,7 @@ const UILoader = (function() {
     }
 
     function _toggleNewTaskForm() {
-        document.querySelector(".task-input").classList.toggle("show");
+        document.querySelector(".task-input-background").classList.toggle("show");
     }
 
     function _toggleNewProjectForm() {
@@ -283,7 +283,7 @@ const UILoader = (function() {
         toggleSidebarBtn.addEventListener('click', () => {Sidebar.toggleShow()});
 
         function _initNewTaskBtn() {
-            const btn = document.querySelector(".task-input-btn");
+            const btn = document.querySelector(".new-task-btn");
 
             btn.addEventListener('click', () => {
                 console.log("hug");

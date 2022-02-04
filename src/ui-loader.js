@@ -141,6 +141,12 @@ const UILoader = (function() {
         projectInput.value = projectName;
     }
 
+    function _predefineFormDate(HTML5DateInputValue) {
+        const taskDateInput = document.querySelector(".date-task-input");
+
+        taskDateInput.value = HTML5DateInputValue;
+    }
+
     function _createNewProjectForm() {
 
     }
@@ -502,19 +508,25 @@ const UILoader = (function() {
             newTaskBtn.insertAdjacentElement("beforebegin", taskNode);
         }
 
-        function _addNewtaskBtn(projectName) {
+        function _addNewTaskBtn(projectName) {
             const tasks = document.querySelector("#project-tasks");
 
             const btn = document.createElement("button");
-            btn.classList.add("project-new-task-btn");
+            btn.classList.add("project-new-task-btn", "row-container");
             btn.addEventListener("click", () => {
-                _predefineFormProject((projectName === "Today") ? "Inbox" : projectName);
+                if (projectName = "Today") {
+                    _predefineFormProject("Inbox");
+                    _predefineFormDate(DateFormatter.getHTML5Date(new Date()));
+                } else {
+                    _predefineFormProject(projectName);
+                }
+
                 _toggleNewTaskForm();
             });
             tasks.appendChild(btn);
 
             const img = document.createElement("img");
-            img.src = "./assets/plus-red.png";
+            img.src = "./assets/plus-blue.png";
             img.classList.add("project-new-task-plus-img");
             btn.appendChild(img);
 
@@ -526,7 +538,7 @@ const UILoader = (function() {
 
         function _displayAll(projectName, tasksData) {
             _displayWindow(projectName);   
-            _addNewtaskBtn(projectName);
+            _addNewTaskBtn(projectName);
             _displayTasks(tasksData, projectName === "Today");
         }
 

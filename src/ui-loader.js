@@ -382,8 +382,10 @@ const UILoader = (function() {
             projectContent.appendChild(projectHeader);
             projectContent.appendChild(tasksContainer);
         }
+        
 
         function _createTask(taskInfo, index) {
+            
             const _task = _createContainer("row");
             _task.classList.add("task");
             _task.setAttribute("title", "Edit task");
@@ -391,12 +393,24 @@ const UILoader = (function() {
             _task.dataset.index = index;
 
 
+            const _removeTask = function() {
+                const tasksContainer = document.querySelector("#project-tasks");
+
+                tasksContainer.removeChild(_task);
+
+                storageUtils.removeTask(taskInfo.project, index);
+
+                Sidebar.update();
+            };
+
             const _taskMain = _createContainer("row");
             _taskMain.classList.add("task-main");
 
 
             const _completeTaskBtn = document.createElement("button");
             _completeTaskBtn.classList.add("complete-task-btn", `task-priority-${taskInfo.priority}`);
+
+            _completeTaskBtn.addEventListener("click", _removeTask);
 
             const _taskContent = _createContainer("col");
             _taskContent.classList.add("task-content");
@@ -434,7 +448,13 @@ const UILoader = (function() {
                 }
             }
 
-            const _leftSection = _createContainer("col");   
+            const _rightSection = _createContainer("col");
+            
+            const deleteBtn = document.createElement("span");
+            deleteBtn.classList.add("delete-task");
+            deleteBtn.textContent = "×";
+
+            deleteBtn.addEventListener("click", _removeTask);
 
             const projectSection = document.createElement("div"); //used for today, empty in other projects
             projectSection.classList.add("task-project");
@@ -446,8 +466,9 @@ const UILoader = (function() {
                     if (_taskDescription.textContent) _taskContent.appendChild(_taskDescription);
                     _taskContent.appendChild(_taskDate);
                         _taskDate.appendChild(_dateText);
-            _task.appendChild(_leftSection);
-                _leftSection.appendChild(projectSection);
+            _task.appendChild(_rightSection);
+                _rightSection.appendChild(deleteBtn);
+                _rightSection.appendChild(projectSection);
 
             return _task;
         }

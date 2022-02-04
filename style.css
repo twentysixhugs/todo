@@ -544,7 +544,7 @@ a {
 /* New task form */
 
 /* Form's background */
-.new-task {
+.task-input-background {
     position: fixed;
     left: 0;
     top: 0;
@@ -560,7 +560,7 @@ a {
     overflow: auto; /* Enable scroll */
 }
 
-.new-task.show {
+.task-input-background.show {
     display: block;
 
     animation: appear 0.2s forwards;
@@ -568,7 +568,7 @@ a {
 }
 
 /* Form's content */  
-.form-new-task {
+.form-task-input {
     min-width: 560px;
     width: 55%;
     margin: auto;
@@ -590,37 +590,37 @@ a {
 }
 
 
-.new-task-data-fieldset {
+.task-input-data-fieldset {
     width: 100%;
 }
 
-.new-task-title,
-.new-task-description {
+.task-input-title,
+.task-input-description {
     padding: 4px;
 }
 
-.new-task-title:focus,
-.new-task-description:focus {
+.task-input-title:focus,
+.task-input-description:focus {
     outline: none;
 }
 
-.date-new-task {
+.date-task-input {
     color: #808080;
 }
 
-.new-task-form-actions {
+.task-input-form-actions {
     margin-top: 12px;
     gap: 12px;
 }
 
-.new-task-confirm,
-.new-task-cancel,
+.task-input-confirm,
+.task-input-cancel,
 .project-dropdown-input,
 .priority-dropdown-input {
     padding: 10px;
     border-radius: 6px;
 }
-.new-task-confirm {
+.task-input-confirm {
     color: #fff;
 
     background: #dc4c3e;
@@ -628,11 +628,11 @@ a {
     transition: all .1s;
 }
 
-.new-task-confirm:hover {
+.task-input-confirm:hover {
     background: #af3c31;
 }
 
-.new-task-cancel,
+.task-input-cancel,
 .project-dropdown-input,
 .priority-dropdown-input {
     border: 1px solid #d3d3d3;
@@ -641,7 +641,7 @@ a {
     transition: all .1s;
 }
 
-.new-task-cancel:hover {
+.task-input-cancel:hover {
     background: #e4e4e4;
 }
 
@@ -683,7 +683,7 @@ a {
     overflow: hidden;
 }
 
-.close-new-task-form {
+.close-task-input-form {
     width: 25px;
     height: 25px;
     margin-right: 9px;
@@ -700,6 +700,6 @@ a {
     cursor: pointer;
 }
 
-.close-new-task-form:hover {
+.close-task-input-form:hover {
     color: #555555;
 }

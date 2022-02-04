@@ -33,14 +33,14 @@ const UILoader = (function() {
     const newProjectForm = _createNewProjectForm();
 
     function _createNewTaskForm() {
-        const background = document.querySelector(".new-task");
+        const background = document.querySelector(".task-input");
 
         const form = document.createElement("form");
-        form.classList.add("form-new-task", "row-container");
+        form.classList.add("form-task-input", "row-container");
         background.appendChild(form);
 
         const fieldSet = document.createElement("fieldset");
-        fieldSet.classList.add("new-task-data-fieldset", "col-container");
+        fieldSet.classList.add("task-input-data-fieldset", "col-container");
         form.appendChild(fieldSet);
 
         const priorityCloseProject = _createContainer("col");
@@ -48,14 +48,14 @@ const UILoader = (function() {
         form.appendChild(priorityCloseProject);
 
         const close = document.createElement("span");
-        close.classList.add("close-new-task-form");
+        close.classList.add("close-task-input-form");
         close.textContent = "×";
 
         close.addEventListener("click", () => {
             _toggleNewTaskForm();
             form.reset();
         });
-
+        
         priorityCloseProject.appendChild(close);
 
         const priorityProject = _createContainer("row");
@@ -71,28 +71,28 @@ const UILoader = (function() {
         const title = document.createElement("input");
         title.setAttribute("type", "text");
         title.setAttribute("placeholder", "Task name")
-        title.classList.add("new-task-title");
+        title.classList.add("task-input-title");
         fieldSet.appendChild(title);
 
         const description = document.createElement("input");
-        description.classList.add("new-task-description");
+        description.classList.add("task-input-description");
         description.setAttribute("type", "text");
         description.setAttribute("placeholder", "Description");
         fieldSet.appendChild(description);
 
         const date = document.createElement("input");
         date.setAttribute("type", "date");
-        date.classList.add("date-new-task");
+        date.classList.add("date-task-input");
         fieldSet.appendChild(date);
 
         const formActions = _createContainer("row");
-        formActions.classList.add("new-task-form-actions");
+        formActions.classList.add("task-input-form-actions");
         fieldSet.appendChild(formActions);
 
 
         //ADD FORM RESET FOR BOTH AND FOR X AS WELL
         const confirmBtn = document.createElement("button");
-        confirmBtn.classList.add("new-task-confirm");
+        confirmBtn.classList.add("task-input-confirm");
         confirmBtn.setAttribute("type", "button");
         confirmBtn.textContent = "Add task";
 
@@ -105,9 +105,15 @@ const UILoader = (function() {
         formActions.appendChild(confirmBtn);
 
         const cancelBtn = document.createElement("button");
-        cancelBtn.classList.add("new-task-cancel");
+        cancelBtn.classList.add("task-input-cancel");
         cancelBtn.setAttribute("type", "button");
         cancelBtn.textContent = "Cancel";
+
+        cancelBtn.addEventListener("click", () => {
+            _toggleNewTaskForm();
+            form.reset();
+        });
+
         formActions.appendChild(cancelBtn);
 
         return form;
@@ -118,7 +124,7 @@ const UILoader = (function() {
     }
 
     function _toggleNewTaskForm() {
-        document.querySelector(".new-task").classList.toggle("show");
+        document.querySelector(".task-input").classList.toggle("show");
     }
 
     function _toggleNewProjectForm() {
@@ -277,7 +283,7 @@ const UILoader = (function() {
         toggleSidebarBtn.addEventListener('click', () => {Sidebar.toggleShow()});
 
         function _initNewTaskBtn() {
-            const btn = document.querySelector(".new-task-btn");
+            const btn = document.querySelector(".task-input-btn");
 
             btn.addEventListener('click', () => {
                 console.log("hug");

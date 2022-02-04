@@ -108,7 +108,8 @@ const UILoader = (function() {
                 ProjectWindow.updateCurrentProject();
             }
 
-            if (DateFormatter.format(new Date(date.value)) === DateFormatter.format(new Date())) { // if task is set to today
+            if (DateFormatter.format(new Date(date.value)) === DateFormatter.format(new Date())
+            && ProjectWindow.getCurrentProject() === "Today") { // if task is set to today and today is opened
                 ProjectWindow.initWindow("Today", storageUtils.getTodayTasks());
             }
 

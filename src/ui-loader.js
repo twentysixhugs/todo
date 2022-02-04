@@ -159,8 +159,23 @@ const UILoader = (function() {
             for (let i = 0; i <= 3; i++) {
                 const priorOption = document.createElement("option");
                 priorOption.classList.add("priority-option");
-                priorOption.value = `priority-${i}`;
-                priorOption.textContent = `Priority ${i}`;
+                priorOption.value = i;
+
+                switch(i) {
+                    case 0:
+                        priorOption.textContent = "Low";
+                        break;
+                    case 1:
+                        priorOption.textContent = "Medium";
+                        break;
+                    case 2: 
+                        priorOption.textContent = "High";
+                        break;
+                    case 3: 
+                        priorOption.textContent = "Urgent";
+                        break;
+                }
+                
 
                 dropdown.appendChild(priorOption);
             }

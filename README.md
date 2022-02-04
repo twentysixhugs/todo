@@ -1,4 +1,4 @@
-### The project was abandoned because I realized too late that the chosen structure of the code was terrible and unmaintainable at all. I moved on and continued learning remembering about all the mistakes I made.
+# A to-do list. Why not?
 
 ### Credits
 - <a href="https://www.flaticon.com/free-icons/add" title="add icons">Add task icon created by Pixel perfect - Flaticon</a>

@@ -328,9 +328,19 @@ aside>div {
     animation-fill-mode: forwards;
 }
 
+@-webkit-keyframes swipeup {
+    from { top: 100%; height: 0}
+    to { top: 0; height: 100%}
+}
+
 @keyframes swipeup {
     from { top: 100%; height: 0}
     to { top: 0; height: 100%}
+}
+
+@keyframes -webkit-swipedown {
+    from { top: 0; height: 100%}
+    to { top: 100%; height: 0}
 }
 
 @keyframes swipedown {
@@ -552,11 +562,15 @@ a {
 
 .new-task.show {
     display: block;
+
+    animation: appear 0.2s forwards;
+    opacity: 0;
 }
 
 /* Form's content */  
 .form-new-task {
-    width: 80%;
+    min-width: 560px;
+    width: 55%;
     margin: auto;
     padding: 20px;
 
@@ -564,6 +578,17 @@ a {
     border: 1px solid #cecece;
     border-radius: 6px;
 }
+
+@-webkit-keyframes appear {
+    from { opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes appear {
+    from { opacity: 0;}
+    to {opacity: 1;}
+}
+
 
 .new-task-data-fieldset {
     width: 100%;
@@ -589,7 +614,9 @@ a {
 }
 
 .new-task-confirm,
-.new-task-cancel {
+.new-task-cancel,
+.project-dropdown-input,
+.priority-dropdown-input {
     padding: 10px;
     border-radius: 6px;
 }
@@ -605,7 +632,9 @@ a {
     background: #af3c31;
 }
 
-.new-task-cancel {
+.new-task-cancel,
+.project-dropdown-input,
+.priority-dropdown-input {
     border: 1px solid #d3d3d3;
     background: #ffffff;
 
@@ -616,9 +645,42 @@ a {
     background: #e4e4e4;
 }
 
-.close-and-priority {
+.priority-close-project {
     justify-content: space-between;
-    float: right;
+}
+
+.priority-and-project {
+    gap: 8px;
+}
+
+.priority-input-container,
+.project-input-container {
+    gap: 4px;
+    align-items: center;
+}
+
+.project-dropdown-input,
+.priority-dropdown-input {
+    width: 120px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+}
+
+.project-dropdown-input:hover,
+.priority-dropdown-input:hover {
+    background: #f3f3f3;
+}
+
+.dropdown-option {
+    width: 120px;
+    text-overflow: ellipsis;
+
+    overflow: hidden;
 }
 
 .close-new-task-form {

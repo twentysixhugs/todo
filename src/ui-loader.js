@@ -460,6 +460,7 @@ const UILoader = (function() {
             }
 
             const _rightSection = _createContainer("col");
+            _rightSection.classList.add("task-close-and-project");
             
             const deleteBtn = document.createElement("span");
             deleteBtn.classList.add("delete-task");

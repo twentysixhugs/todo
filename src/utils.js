@@ -81,15 +81,19 @@ const storageUtils = (function () {
 
     }
 
-    function getProject() {
+    function getProject(name) {
+        return storage["projectsData"][name];
+    }
 
+    function getProjectAll() {
+        return storage["projectsData"];
     }
 
     function getTodayTasks() {
         const todayTasks = [];
 
-        for (const project in storage["projectsData"]) {
-            const tasks = storage["projectsData"][project]["tasks"];
+        for (const project in getProjectAll()) {
+            const tasks = getProjectAll()[project]["tasks"];
 
             tasks.forEach(task => {
                 const today = DateFormatter.format(new Date());
@@ -104,7 +108,14 @@ const storageUtils = (function () {
         return todayTasks;
     }
 
-    return {init, addProject, addTask, getTodayTasks};
+    return {
+        init, 
+        addProject, 
+        addTask, 
+        getTodayTasks, 
+        getProject, 
+        getProjectAll,
+    };
 })();
 
 export {DateFormatter, storageUtils};

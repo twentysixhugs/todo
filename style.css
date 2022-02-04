@@ -104,7 +104,8 @@ button {
     display: flex;
     align-items: center;
 
-    background: #dc4c3e;
+    /* background: #dc4c3e; */
+    background: #1a1a1a;
 }
 
 #main-header nav {
@@ -127,12 +128,13 @@ button {
 }
 
 #main-header button:hover {
-    background-color: #e7695d;
+    /* background-color: #e7695d; */
+    background-color: #e4e4e423;
     transition: all 0.2s;
 }
 
 #main-header button:active {
-    background-color: #f16d60;
+    background-color: #f3f3f323;
 }
 
 #main-header button img {
@@ -519,8 +521,8 @@ a {
     width: 15px;
 
 
-    -webkit-filter: hue-rotate(120deg) brightness(85%) saturate(120%);
-            filter: hue-rotate(120deg) brightness(85%) saturate(120%);
+    -webkit-filter: hue-rotate(20deg) brightness(85%) saturate(120%);
+            filter: hue-rotate(20deg) brightness(85%) saturate(120%);
 }
 
 .date-text {
@@ -528,7 +530,12 @@ a {
 }
 
 .today-text {
-    color: rgb(199, 42, 199);
+    color: rgb(44, 116, 184);
+}
+
+.task-close-and-project {
+    justify-content: space-between;
+    height: 100%;
 }
 
 .task-project {
@@ -540,6 +547,51 @@ a {
     color: #808080;
 }
 
+.delete-task {
+    width: 25px;
+    height: 25px;
+    margin-right: 9px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+
+    font-size: 24px;
+
+    color: #808080;
+    
+    cursor: pointer;
+}
+
+.delete-task:hover {
+    color: #555555;
+}
+
+
+/* New task button inside opened project */
+
+.project-new-task-btn {
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    margin-left: calc(1rem - 6px);
+}
+
+.project-new-task-btn:hover {
+    color: #4185c8;
+}
+
+
+
+.project-new-task-plus-img {
+    width: calc(1rem + 2px);
+    height: calc(1rem + 2px);
+}
+
+.project-new-task-text {
+
+}
 
 /* New task form */
 
@@ -623,13 +675,13 @@ a {
 .task-input-confirm {
     color: #fff;
 
-    background: #dc4c3e;
+    background: #2a2a2a;
 
     transition: all .1s;
 }
 
 .task-input-confirm:hover {
-    background: #af3c31;
+    background: #3a3a3a;
 }
 
 .task-input-cancel,

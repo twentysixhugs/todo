@@ -29,8 +29,9 @@ const UILoader = (function() {
 
     /* Forms */
 
-    const newTaskForm = _createNewTaskForm();
-    const newProjectForm = _createNewProjectForm();
+
+    window.onload = () => {_createNewTaskForm()};
+
 
     function _createNewTaskForm() {
         const background = document.querySelector(".task-input-background");
@@ -89,17 +90,32 @@ const UILoader = (function() {
         formActions.classList.add("task-input-form-actions");
         fieldSet.appendChild(formActions);
 
-
-        //ADD FORM RESET FOR BOTH AND FOR X AS WELL
         const confirmBtn = document.createElement("button");
         confirmBtn.classList.add("task-input-confirm");
         confirmBtn.setAttribute("type", "button");
         confirmBtn.textContent = "Add task";
 
         confirmBtn.addEventListener("click", () => {
-            //const selectedPriority
+            storageUtils.addTask(
+                title.value,
+                description.value,
+                date.value,
+                priority.lastChild.value,
+                project.lastChild.value
+                );
 
-            storageUtils.addTask(title.value, description.value, date.value, )
+            if (project.lastChild.value === ProjectWindow.getCurrentProject()) {
+                ProjectWindow.updateCurrentProject();
+            }
+
+            if (DateFormatter.format(new Date(date.value)) === DateFormatter.format(new Date())) { // if task is set to today
+                ProjectWindow.initWindow("Today", storageUtils.getTodayTasks());
+            }
+
+            Sidebar.update();
+
+            form.reset();
+            _toggleNewTaskForm();
         });
 
         formActions.appendChild(confirmBtn);
@@ -124,7 +140,8 @@ const UILoader = (function() {
     }
 
     function _toggleNewTaskForm() {
-        document.querySelector(".task-input-background").classList.toggle("show");
+        const formBackground = document.querySelector(".task-input-background");
+        formBackground.classList.toggle("show");
     }
 
     function _toggleNewProjectForm() {
@@ -246,19 +263,47 @@ const UILoader = (function() {
                 ProjectWindow.initWindow(projectName, projectsData[projectName].tasks);
             });
 
-            /* add to inbox manually. it's always present */
-            const inbox = document.querySelector('#main-projects .project[data-project="Inbox"]');
-            inbox.addEventListener("click", () => {
-                ProjectWindow.initWindow("Inbox", projectsData["Inbox"].tasks);
-            })
         }
 
-        function addEventToToday(todayTasks) {
+        function addEventToToday() {
             const todayButton = document.querySelector('.project[data-project="Today"]');
 
             todayButton.addEventListener('click', () => {
-                ProjectWindow.initWindow("Today", todayTasks);
+                ProjectWindow.initWindow("Today", storageUtils.getTodayTasks());
             });
+        }
+
+        function addEventToInbox() {
+            const inbox = document.querySelector('#main-projects .project[data-project="Inbox"]');
+            inbox.addEventListener("click", () => {
+                ProjectWindow.initWindow("Inbox", storageUtils.getProject("Inbox").tasks);
+            });
+        }
+
+        function update() {
+            const projectsList = document.querySelector("#projects ul");
+
+            _removeAllChildNodes(projectsList);
+
+            const projectsData = storageUtils.getProjectAll();
+
+            for (const project in projectsData) {
+                if (projectsData[project].name !== "Inbox") {
+                    const tasksCount = projectsData[project].tasks.length;
+
+                    addProject(projectsData[project].name, tasksCount);
+                }
+            }
+
+            const shownInboxTasksCount = document.querySelector(".project[data-project=\"Inbox\"] .project-tasks-count");
+            const shownTodayTasksCount = document.querySelector(".project[data-project=\"Today\"] .project-tasks-count");
+
+            shownInboxTasksCount.textContent = projectsData["Inbox"].tasks.length;
+            shownTodayTasksCount.textContent = storageUtils.getTodayTasks().length;
+
+            addEventsToProjects(projectsData);
+
+
         }
 
         (function _enableProjectsDropdown() {
@@ -274,7 +319,14 @@ const UILoader = (function() {
             });
         })();
 
-        return {addProject, toggleShow, addEventsToProjects, addEventToToday};
+        return {
+            addProject, 
+            toggleShow, 
+            addEventsToProjects, 
+            addEventToToday,
+            addEventToInbox, 
+            update,
+        };
     })();
 
     const Header = (function() {
@@ -429,12 +481,27 @@ const UILoader = (function() {
             // _initNewTaskBtn(projectName);
         }
 
+        let _currentProject;
+        let _currentTasksData;
+
+        function getCurrentProject() {
+            return _currentProject;
+        }
+
+        function updateCurrentProject() {
+            _currentTasksData = storageUtils.getProject(_currentProject).tasks;
+            
+            _displayAll(_currentProject, _currentTasksData);
+            _initEvents(_currentProject, _currentTasksData);
+        }
+
         function initWindow(projectName, tasksData) {
+            _currentProject = projectName;
             _displayAll(projectName, tasksData);
             _initEvents(projectName, tasksData);
         }
 
-        return {initWindow};
+        return {initWindow, getCurrentProject, updateCurrentProject};
     })();
 
     return {Sidebar, Header, ProjectWindow, load};

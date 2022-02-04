@@ -270,6 +270,17 @@ aside ul li.selected {
     transform: rotate(-90deg);
 }
 
+.new-project-input {
+    /* display: hidden; */
+}
+
+.new-project-input.show {
+    display: block;
+
+    animation: appear 0.2s forwards;
+    opacity: 0;
+}
+
 .circle {
     width: 10px;
 }
@@ -651,6 +662,16 @@ a {
     padding: 4px;
 }
 
+.empty-title-warning {
+    display: none;
+    padding: 4px;
+    color: red;
+}
+
+.empty-title-warning.show {
+    display: block;
+}
+
 .task-input-title:focus,
 .task-input-description:focus {
     outline: none;
@@ -754,4 +775,64 @@ a {
 
 .close-task-input-form:hover {
     color: #555555;
+}
+
+/* New project form */
+
+.new-project {
+    background: rgb(231, 231, 231);
+}
+
+.new-project:hover {
+    background: rgb(231, 231, 231) !important;
+}
+
+.new-project-input {
+    width: 100%;
+}
+
+.new-project-input-name {
+    height: 26px;
+    padding: 4px;
+}
+
+.new-project-input-name:focus {
+    outline: none;
+    box-shadow: #00516977 0 0 2px;
+}
+
+.new-project-input {
+    gap: 8px;
+}
+
+.new-project-actions {
+    gap: 8px;
+}
+
+.project-input-confirm,
+.project-input-cancel {
+    padding: 10px;
+    border-radius: 6px;
+}
+.project-input-confirm {
+    color: #fff;
+
+    background: #2a2a2a;
+
+    transition: all .1s;
+}
+
+.project-input-confirm:hover {
+    background: #3a3a3a;
+}
+
+.project-input-cancel {
+    border: 1px solid #d3d3d3;
+    background: #ffffff;
+
+    transition: all .1s;
+}
+
+.project-input-cancel:hover {
+    background: #e4e4e4;
 }

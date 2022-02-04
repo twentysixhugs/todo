@@ -2,6 +2,7 @@
 /* To that end, there are many long, chained and completely unreadable selectors */
 /* that I'm aware of. However, instead of rewriting, I chose to go forward and */
 /* make sure I don't repeat such mistakes in the future. */
+/* For this project, I just tried to write cleaner at the end */
 
 
 html, body, div, span, applet, object, iframe,
@@ -280,16 +281,16 @@ aside>div {
     justify-content: space-between;
 }
 
-aside #projects {
+#projects {
     position: relative;
     transition: all .3s;
 }
 
-aside #projects.hidden {
+#projects.hidden {
     position: relative;
 }
 
-aside #projects.hidden:after
+#projects.hidden:after
 {
     content: '';
     position: absolute;
@@ -308,7 +309,7 @@ aside #projects.hidden:after
     animation-fill-mode: forwards;
 }
 
-aside #projects:after
+#projects:after
 {
     content: '';
     position: absolute;
@@ -396,7 +397,7 @@ a {
     font-weight: bold;
 }
 
-#project-header #project-current-date {
+#project-current-date {
     margin-bottom: 2px;
 
     font-size: calc(1rem - 3px);
@@ -438,7 +439,7 @@ a {
     font-weight: 400;
 }
 
-.task-main .task-description {
+.task-description {
     font-size: calc(1rem - 3px);
 }
 
@@ -464,35 +465,35 @@ a {
     transition: all 0.2s;
 }
 
-.complete-task-btn.task-priority-0 {
+.task-priority-0 {
     border: 2px solid #808080; 
 }
 
-.complete-task-btn.task-priority-1 {
+.task-priority-1 {
     border: 2px solid #008cff; 
 }
 
-.complete-task-btn.task-priority-2 {
+.task-priority-2 {
     border: 2px solid #ffae00; 
 }
 
-.complete-task-btn.task-priority-3 {
+.task-priority-3 {
     border: 2px solid #df0000; 
 }
 
-.complete-task-btn.task-priority-0:hover {
+.task-priority-0:hover {
     background: #5c5c5c21;
 }
 
-.complete-task-btn.task-priority-1:hover {
+.task-priority-1:hover {
     background: #00366621;
 }
 
-.complete-task-btn.task-priority-2:hover {
+.task-priority-2:hover {
     background: #be850021;
 }
 
-.complete-task-btn.task-priority-3:hover {
+.task-priority-3:hover {
     background: #66000021;
 }
 
@@ -512,73 +513,12 @@ a {
             filter: hue-rotate(120deg) brightness(85%) saturate(120%);
 }
 
-.task-date>.date-text {
+.date-text {
     opacity: 0.6;
 }
 
-.task-date>.today-text {
+.today-text {
     color: rgb(199, 42, 199);
-}
-
-.priority-selection {
-    gap: 8px;
-
-    margin-bottom: 6px;
-}
-
-.priority-selection > label {
-    width: 100%;
-}
-
-.priority-selection .priority-btn {
-    width: 20px;
-    height: 20px;
-
-    border-radius: 100%;
-}
-
-.priority-selection img {
-    width: 20px;
-    height: 20px;
-}
-
-.priority-selection img.selected {
-    width: 28px;
-    height: 28px;
-}
-
-.priority-btn img{
-    transition: all 0.1s;
-}
-
-.img-priority-1 {
-    -webkit-filter: hue-rotate(175deg) brightness(84%);
-            filter: hue-rotate(175deg) brightness(84%);       
-}
-
-.img-priority-2 {
-    -webkit-filter: hue-rotate(350deg) brightness(94%);
-        filter: hue-rotate(350deg) brightness(94%);   
-}
-
-.img-priority-3 {
-    -webkit-filter: hue-rotate(307deg) brightness(79%);
-        filter: hue-rotate(307deg) brightness(79%);   
-}
-
-.img-priority-1:hover {
-    -webkit-filter: hue-rotate(175deg) brightness(60%);
-            filter: hue-rotate(175deg) brightness(60%);       
-}
-
-.img-priority-2:hover {
-    -webkit-filter: hue-rotate(350deg) brightness(70%);
-            filter: hue-rotate(350deg) brightness(70%);       
-}
-
-.img-priority-3:hover {
-    -webkit-filter: hue-rotate(307deg) brightness(55%);
-            filter: hue-rotate(307deg) brightness(55%);       
 }
 
 .task-project {

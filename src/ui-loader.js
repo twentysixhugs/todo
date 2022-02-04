@@ -459,8 +459,8 @@ const UILoader = (function() {
                 }
             }
 
-            const _rightSection = _createContainer("col");
-            _rightSection.classList.add("task-close-and-project");
+            const _closeAndProject = _createContainer("col");
+            _closeAndProject.classList.add("task-close-and-project");
             
             const deleteBtn = document.createElement("span");
             deleteBtn.classList.add("delete-task");
@@ -472,15 +472,15 @@ const UILoader = (function() {
             projectSection.classList.add("task-project");
 
             _task.appendChild(_taskMain);
-                _taskMain.appendChild(_completeTaskBtn);
-                _taskMain.appendChild(_taskContent);
-                    _taskContent.appendChild(_taskName);
-                    if (_taskDescription.textContent) _taskContent.appendChild(_taskDescription);
-                    _taskContent.appendChild(_taskDate);
-                        _taskDate.appendChild(_dateText);
-            _task.appendChild(_rightSection);
-                _rightSection.appendChild(deleteBtn);
-                _rightSection.appendChild(projectSection);
+            _taskMain.appendChild(_completeTaskBtn);
+            _taskMain.appendChild(_taskContent);
+            _taskContent.appendChild(_taskName);
+            if (_taskDescription.textContent) _taskContent.appendChild(_taskDescription);
+            _taskContent.appendChild(_taskDate);
+            _taskDate.appendChild(_dateText);
+            _task.appendChild(_closeAndProject);
+            _closeAndProject.appendChild(deleteBtn);
+            _closeAndProject.appendChild(projectSection);
 
             return _task;
         }

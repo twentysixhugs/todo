@@ -385,6 +385,7 @@ const UILoader = (function() {
         function _createTask(taskInfo, index) {
             const _task = _createContainer("row");
             _task.classList.add("task");
+            _task.setAttribute("title", "Edit task");
             _task.dataset.project = taskInfo.project;
             _task.dataset.index = index;
 

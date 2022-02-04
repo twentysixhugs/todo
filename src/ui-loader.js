@@ -43,9 +43,9 @@ const UILoader = (function() {
         fieldSet.classList.add("new-task-data-fieldset", "col-container");
         form.appendChild(fieldSet);
 
-        const closeAndPriority = _createContainer("col");
-        closeAndPriority.classList.add("close-and-priority");
-        form.appendChild(closeAndPriority);
+        const priorityCloseProject = _createContainer("col");
+        priorityCloseProject.classList.add("priority-close-project");
+        form.appendChild(priorityCloseProject);
 
         const close = document.createElement("span");
         close.classList.add("close-new-task-form");
@@ -56,10 +56,17 @@ const UILoader = (function() {
             form.reset();
         });
 
-        closeAndPriority.appendChild(close);
+        priorityCloseProject.appendChild(close);
 
-        const priority = _createPrioritiesInput();
-        closeAndPriority.appendChild(priority);
+        const priorityProject = _createContainer("row");
+        priorityProject.classList.add("priority-and-project");
+        priorityCloseProject.appendChild(priorityProject);
+
+        const priority = _createFormDropdown("priority");
+        priorityProject.appendChild(priority);
+
+        const project = _createFormDropdown("project");
+        priorityProject.appendChild(project);
 
         const title = document.createElement("input");
         title.setAttribute("type", "text");
@@ -73,23 +80,10 @@ const UILoader = (function() {
         description.setAttribute("placeholder", "Description");
         fieldSet.appendChild(description);
 
-        const extraProps = _createContainer("row");
-        extraProps.classList.add("extra-props-new-task");
-        fieldSet.appendChild(extraProps);
-
-        const dateProject = _createContainer("row");
-        dateProject.classList.add("date-project-new-task");
-        extraProps.appendChild(dateProject);
-
         const date = document.createElement("input");
         date.setAttribute("type", "date");
         date.classList.add("date-new-task");
-        dateProject.appendChild(date);
-
-        const project = document.createElement("input");
-        project.setAttribute("type", "button");
-        project.classList.add("project-new-task");
-        dateProject.appendChild(project);
+        fieldSet.appendChild(date);
 
         const formActions = _createContainer("row");
         formActions.classList.add("new-task-form-actions");
@@ -133,42 +127,47 @@ const UILoader = (function() {
 
     /* General */
 
-    function _createPrioritiesInput() {
-        const _prioritySelection = document.createElement("nav");
-        _prioritySelection.classList.add("priority-selection", "row-container");
+    function _createFormDropdown(input) {
+        const container = _createContainer("row");
+        container.classList.add(`${input}-input-container`);
 
-        /* Create priority buttons and append parent with them*/
-        for (let i = 3; i >= 0; i--) {
-            const btn = document.createElement("input");
-            btn.setAttribute("type", "radio");
-            btn.setAttribute("name", "priority");
-            btn.id = "priority";
-            btn.classList.add("priority-btn", `priority-${i}`, "image-btn");
+        const label = document.createElement("label");
+        label.setAttribute("for", `${input}-dropdown-input`);
+        label.textContent = `${input.slice(0, 1).toUpperCase() + input.slice(1)}:`; //capitalize first letter
+        container.appendChild(label);
 
-            const label = document.createElement("label");
-            label.setAttribute("for", "priority");
-            label.textContent = `Priority ${i}`;
+        const dropdown = document.createElement("select");
+        dropdown.id = `${input}-dropdown-input`;
+        dropdown.setAttribute("name", `${input}`);
+        dropdown.classList.add(`${input}-dropdown-input`);
+        container.appendChild(dropdown);
 
-            if (i === 0) {
-                btn.setAttribute("checked", "");
+        if (input === "project") {
+            const projectsData = storageUtils.getProjectAll();
+
+            for (const project in projectsData) {
+                const projOption = document.createElement("option");
+                projOption.classList.add("dropdown-option");
+                projOption.value = projectsData[project]["name"];
+                projOption.textContent = projectsData[project]["name"];
+
+                dropdown.appendChild(projOption);
             }
-
-            btn.addEventListener("click", () => {
-                btn.classList.toggle("priority-selected");
-            });
-
-            _prioritySelection.appendChild(label);
-            _prioritySelection.appendChild(btn);
-            
-            const priorityPic = document.createElement("img");
-            priorityPic.classList.add(`img-priority-${i}`);
-            priorityPic.src = "./assets/flag.png";
-            priorityPic.alt = `set priority ${i}`;
-
-            btn.appendChild(priorityPic);
         }
 
-        return _prioritySelection;
+        if (input === "priority") {
+            for (let i = 0; i <= 3; i++) {
+                const priorOption = document.createElement("option");
+                priorOption.classList.add("priority-option");
+                priorOption.value = `priority-${i}`;
+                priorOption.textContent = `Priority ${i}`;
+
+                dropdown.appendChild(priorOption);
+            }
+        }
+
+
+        return container;
     }
 
     const Sidebar = (function() {

@@ -136,6 +136,11 @@ const UILoader = (function() {
         return form;
     }
 
+    function _predefineFormProject(projectName) {
+        const projectInput = document.querySelector(".project-dropdown-input");
+        projectInput.value = projectName;
+    }
+
     function _createNewProjectForm() {
 
     }
@@ -491,17 +496,38 @@ const UILoader = (function() {
         }
 
         function _showTask(taskNode) {
-            const tasksContainer = document.querySelector("#project-tasks");
-            tasksContainer.appendChild(taskNode);
+            // const tasksContainer = document.querySelector("#project-tasks");
+            // tasksContainer.appendChild(taskNode);
+            const newTaskBtn = document.querySelector(".project-new-task-btn");
+            newTaskBtn.insertAdjacentElement("beforebegin", taskNode);
+        }
+
+        function _addNewtaskBtn(projectName) {
+            const tasks = document.querySelector("#project-tasks");
+
+            const btn = document.createElement("button");
+            btn.classList.add("project-new-task-btn");
+            btn.addEventListener("click", () => {
+                _predefineFormProject((projectName === "Today") ? "Inbox" : projectName);
+                _toggleNewTaskForm();
+            });
+            tasks.appendChild(btn);
+
+            const img = document.createElement("img");
+            img.src = "./assets/plus-red.png";
+            img.classList.add("project-new-task-plus-img");
+            btn.appendChild(img);
+
+            const btnText = document.createElement("span");
+            btnText.classList.add("project-new-task-text");
+            btnText.textContent = "Add task";
+            btn.appendChild(btnText);
         }
 
         function _displayAll(projectName, tasksData) {
             _displayWindow(projectName);   
+            _addNewtaskBtn(projectName);
             _displayTasks(tasksData, projectName === "Today");
-        }
-
-        function _initEvents(projectName, tasksData) {
-            // _initNewTaskBtn(projectName);
         }
 
         let _currentProject;
@@ -515,13 +541,11 @@ const UILoader = (function() {
             _currentTasksData = storageUtils.getProject(_currentProject).tasks;
             
             _displayAll(_currentProject, _currentTasksData);
-            _initEvents(_currentProject, _currentTasksData);
         }
 
         function initWindow(projectName, tasksData) {
             _currentProject = projectName;
             _displayAll(projectName, tasksData);
-            _initEvents(projectName, tasksData);
         }
 
         return {initWindow, getCurrentProject, updateCurrentProject};

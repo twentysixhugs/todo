@@ -515,7 +515,7 @@ const UILoader = (function() {
             const btn = document.createElement("button");
             btn.classList.add("project-new-task-btn", "row-container");
             btn.addEventListener("click", () => {
-                if (projectName = "Today") {
+                if (_currentProject === "Today") {
                     _predefineFormProject("Inbox");
                     _predefineFormDate(DateFormatter.getHTML5Date(new Date()));
                 } else {

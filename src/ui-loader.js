@@ -30,7 +30,7 @@ const UILoader = (function() {
     /* Forms */
 
 
-    window.onload = () => {_createNewTaskForm()};
+    window.onload = () => {_createNewTaskForm(), _createNewProjectForm()};
 
 
     function _createNewTaskForm() {
@@ -71,9 +71,18 @@ const UILoader = (function() {
 
         const title = document.createElement("input");
         title.setAttribute("type", "text");
-        title.setAttribute("placeholder", "Task name")
+        title.setAttribute("placeholder", "Task name");
         title.classList.add("task-input-title");
+
+        const emptyTitleWarning = document.createElement("span");
+        emptyTitleWarning.classList.add("empty-title-warning");
+        emptyTitleWarning.textContent = "Please, fill out task name"
+
+        title.addEventListener("click", () => {
+            emptyTitleWarning.classList.remove("show");
+        });
         fieldSet.appendChild(title);
+        fieldSet.appendChild(emptyTitleWarning);
 
         const description = document.createElement("input");
         description.classList.add("task-input-description");
@@ -96,6 +105,10 @@ const UILoader = (function() {
         confirmBtn.textContent = "Add task";
 
         confirmBtn.addEventListener("click", () => {
+            if (!title.value) {
+                emptyTitleWarning.classList.add("show");
+                return;
+            }
             storageUtils.addTask(
                 title.value,
                 description.value,
@@ -132,8 +145,6 @@ const UILoader = (function() {
         });
 
         formActions.appendChild(cancelBtn);
-
-        return form;
     }
 
     function _predefineFormProject(projectName) {
@@ -148,7 +159,36 @@ const UILoader = (function() {
     }
 
     function _createNewProjectForm() {
+        const projects = document.querySelector("#projects ul");
 
+        const li = document.createElement("li");
+        li.classList.add("row-container");
+        projects.appendChild(li);
+
+        const form = document.createElement("form");
+        form.classList.add("new-project-input");
+        li.appendChild(form);
+
+        const nameInput = document.createElement("input");
+        nameInput.setAttribute("type", "text");
+        nameInput.classList.add("new-project-input-name");
+        form.appendChild(nameInput);
+
+        const confirmBtn = document.createElement("button");
+        confirmBtn.classList.add("project-input-confirm");
+        confirmBtn.setAttribute("type", "button");
+        confirmBtn.textContent = "Add project";
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.classList.add("project-input-cancel");
+        cancelBtn.setAttribute("type", "button");
+        cancelBtn.textContent = "Cancel";
+
+        cancelBtn.addEventListener("click", () => {
+            _toggleNewTaskForm();
+            form.reset();
+        });
+        
     }
 
     function _toggleNewTaskForm() {
@@ -157,7 +197,8 @@ const UILoader = (function() {
     }
 
     function _toggleNewProjectForm() {
-
+        const form = document.querySelector("new-project-input");
+        form.classList.toggle("show");
     }
 
     /* General */

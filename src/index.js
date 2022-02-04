@@ -26,3 +26,4 @@ UILoader.Sidebar.addEventToToday(storageUtils.getTodayTasks());
 
 UILoader.ProjectWindow.initWindow("Today", storageUtils.getTodayTasks());
 UILoader.Header.init();
+//

@@ -25,12 +25,19 @@ const UILoader = (function() {
     /* On pageload */
 
     function load() {
+        Sidebar.update();
+        Sidebar.addEventToToday();
+        Sidebar.addEventToInbox();
+        Sidebar.addNewProjectEvent();
+        ProjectWindow.initWindow("Today", storageUtils.getTodayTasks());
+        _createNewTaskForm();
+        Header.init();
     }
 
     /* Forms */
 
 
-    window.onload = () => {_createNewTaskForm()};
+    window.onload = () => {};
 
 
     function _createNewTaskForm() {
@@ -553,6 +560,7 @@ const UILoader = (function() {
                 storageUtils.removeTask(taskInfo.project, index);
 
                 Sidebar.update();
+                ProjectWindow.updateCurrentProject();
             };
 
             const _taskMain = _createContainer("row");

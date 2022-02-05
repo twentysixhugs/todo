@@ -55,7 +55,7 @@ const UILoader = (function() {
         close.addEventListener("click", () => {
             _toggleNewTaskForm();
             emptyTitleWarning.classList.remove("show");
-            form.reset();
+            /* form.reset(); */
         });
         
         priorityCloseProject.appendChild(close);
@@ -129,7 +129,7 @@ const UILoader = (function() {
 
             Sidebar.update();
 
-            form.reset();
+            /* form.reset() */;
             _toggleNewTaskForm();
         });
 
@@ -143,7 +143,6 @@ const UILoader = (function() {
         cancelBtn.addEventListener("click", () => {
             emptyTitleWarning.classList.remove("show");
             _toggleNewTaskForm();
-            form.reset();
         });
 
         formActions.appendChild(cancelBtn);
@@ -230,7 +229,7 @@ const UILoader = (function() {
 
             storageUtils.addProject(nameInput.value);
             _toggleNewProjectForm();
-            form.reset();
+            /* form.reset(); */
             Sidebar.update();
         });
 
@@ -662,6 +661,7 @@ const UILoader = (function() {
             btn.classList.add("project-new-task-btn", "row-container");
             btn.addEventListener("click", () => {
                 if (_currentProject === "Today") {
+                    _updateFormData();
                     _predefineFormProject("Inbox");
                     _predefineFormDate(DateFormatter.getHTML5Date(new Date()));
                 } else {

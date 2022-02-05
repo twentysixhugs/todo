@@ -201,6 +201,10 @@ aside:hover {
 
 .delete-project-btn {
     display: none;
+
+    font-size: calc(1rem + 2px);
+
+    color: #808080;
 }
 
 .delete-project-btn.show {

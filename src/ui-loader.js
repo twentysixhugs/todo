@@ -429,6 +429,9 @@ const UILoader = (function() {
 
             newProjectBtn.addEventListener("click", () => {
                 _toggleNewProjectForm();
+
+                const projects = document.querySelector("#projects");
+                projects.classList.remove("hidden");
             });
         }
 

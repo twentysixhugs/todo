@@ -109,6 +109,11 @@ const storageUtils = (function () {
         _updateLocalStorage("projectsData");
     }
 
+    function removeProject(name) {
+        delete storage["projectsData"].name;
+        _updateLocalStorage("projectsData");
+    }
+
     function getProject(name) {
         return storage["projectsData"][name];
     }
@@ -138,7 +143,8 @@ const storageUtils = (function () {
 
     return {
         init, 
-        addProject, 
+        addProject,
+        removeProject, 
         addTask,
         removeTask, 
         getTodayTasks, 

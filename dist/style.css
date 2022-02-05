@@ -297,9 +297,6 @@ aside ul li.selected {
     transform: rotate(-90deg);
 }
 
-.new-project-input {
-    /* display: hidden; */
-}
 
 .new-project-input.show {
     display: block;
@@ -625,10 +622,6 @@ a {
 .project-new-task-plus-img {
     width: calc(1rem + 2px);
     height: calc(1rem + 2px);
-}
-
-.project-new-task-text {
-
 }
 
 /* New task form */

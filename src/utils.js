@@ -6,7 +6,33 @@ const DateFormatter = (function() {
         return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
     }
 
-    return {format};
+    function getHTML5Date(date) {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let year = date.getFullYear();
+
+        if (month < 10) {
+            month = `0${month}`;
+        }
+
+        if (day < 10) {
+            day = `0${day}`;
+        }
+
+        if (year < 10) {
+            year = `000${year}`;
+        }
+        else if (year < 100) {
+            year = `00${year}`;
+        }
+        else if (year < 1000) {
+            year = `0${year}`;
+        }
+        
+        return `${year}-${month}-${day}`;
+    }
+
+    return {format, getHTML5Date};
 })();
 
 const storageUtils = (function () {
@@ -77,8 +103,10 @@ const storageUtils = (function () {
         _updateLocalStorage("projectsData");
     }
 
-    function getTask() {
+    function removeTask(project, index) {
+        storage["projectsData"][project].tasks.splice(index, 1);
 
+        _updateLocalStorage("projectsData");
     }
 
     function getProject(name) {
@@ -111,7 +139,8 @@ const storageUtils = (function () {
     return {
         init, 
         addProject, 
-        addTask, 
+        addTask,
+        removeTask, 
         getTodayTasks, 
         getProject, 
         getProjectAll,

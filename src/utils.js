@@ -88,6 +88,7 @@ const storageUtils = (function () {
                 this["date"] = DateFormatter.format(new Date(date));
                 this["priority"] = priority;
                 this["project"] = project;
+                this["index"] = storage["projectsData"][project]["tasks"].indexOf(this);
             }
 
             setDate(d) {
@@ -110,7 +111,7 @@ const storageUtils = (function () {
     }
 
     function removeProject(name) {
-        delete storage["projectsData"].name;
+        delete storage["projectsData"][name];
         _updateLocalStorage("projectsData");
     }
 

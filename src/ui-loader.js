@@ -186,12 +186,18 @@ const UILoader = (function() {
         emptyNameWarning.classList.add("empty-title-warning");
         emptyNameWarning.textContent = "Please, fill out project name";
 
+        const notUniqueNameWarning = document.createElement("span");
+        notUniqueNameWarning.classList.add("empty-title-warning");
+        notUniqueNameWarning.textContent = "Please, enter a unique project name";
+
         nameInput.addEventListener("click", () => {
             emptyNameWarning.classList.remove("show");
+            notUniqueNameWarning.classList.remove("show");
         });
 
         form.appendChild(nameInput);
         form.appendChild(emptyNameWarning);
+        form.appendChild(notUniqueNameWarning);
 
         const buttonsContainer = _createContainer("row");
         buttonsContainer.classList.add("new-project-actions");
@@ -205,6 +211,20 @@ const UILoader = (function() {
         confirmBtn.addEventListener("click", () => {
             if (!nameInput.value) {
                 emptyNameWarning.classList.add("show");
+                return;
+            }
+
+            const projects = storageUtils.getProjectAll();
+
+            for (const project in projects) {
+                if (projects[project].name === nameInput.value) {
+                    notUniqueNameWarning.classList.add("show");
+                    return;
+                }
+            }
+
+            if (nameInput.value === "Today") {
+                notUniqueNameWarning.classList.add("show");
                 return;
             }
 

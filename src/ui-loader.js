@@ -36,7 +36,7 @@ const UILoader = (function() {
     function _createNewTaskForm() {
         const background = document.querySelector(".task-input-background");
 
-        const form = document.createElement("form");
+        const form = document.createElement("div");
         form.classList.add("form-task-input", "row-container");
         background.appendChild(form);
 
@@ -173,7 +173,7 @@ const UILoader = (function() {
         li.classList.add("col-container", "new-project");
         projects.appendChild(li);
 
-        const form = document.createElement("form");
+        const form = document.createElement("div");
         form.classList.add("new-project-input", "col-container");
         li.appendChild(form);
 

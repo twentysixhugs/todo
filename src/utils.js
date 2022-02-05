@@ -85,7 +85,7 @@ const storageUtils = (function () {
             constructor(title, description, date, priority, project) {
                 this["title"] = title;
                 this["description"] = description;
-                this["date"] = DateFormatter.format(new Date(date));
+                if (date) this["date"] = DateFormatter.format(new Date(date));
                 this["priority"] = priority;
                 this["project"] = project;
                 this["index"] = storage["projectsData"][project]["tasks"].indexOf(this);

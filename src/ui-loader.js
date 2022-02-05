@@ -54,6 +54,7 @@ const UILoader = (function() {
 
         close.addEventListener("click", () => {
             _toggleNewTaskForm();
+            emptyTitleWarning.classList.remove("show");
             form.reset();
         });
         
@@ -140,6 +141,7 @@ const UILoader = (function() {
         cancelBtn.textContent = "Cancel";
 
         cancelBtn.addEventListener("click", () => {
+            emptyTitleWarning.classList.remove("show");
             _toggleNewTaskForm();
             form.reset();
         });
@@ -172,7 +174,18 @@ const UILoader = (function() {
         const nameInput = document.createElement("input");
         nameInput.setAttribute("type", "text");
         nameInput.classList.add("new-project-input-name");
+        
+
+        const emptyNameWarning = document.createElement("span");
+        emptyNameWarning.classList.add("empty-title-warning");
+        emptyNameWarning.textContent = "Please, fill out project name";
+
+        nameInput.addEventListener("click", () => {
+            emptyNameWarning.classList.remove("show");
+        });
+
         form.appendChild(nameInput);
+        form.appendChild(emptyNameWarning);
 
         const buttonsContainer = _createContainer("row");
         buttonsContainer.classList.add("new-project-actions");
@@ -182,14 +195,27 @@ const UILoader = (function() {
         confirmBtn.classList.add("project-input-confirm");
         confirmBtn.setAttribute("type", "button");
         confirmBtn.textContent = "Add project";
+
+        confirmBtn.addEventListener("click", () => {
+            if (!nameInput.value) {
+                emptyNameWarning.classList.add("show");
+                return;
+            }
+            storageUtils.addProject(nameInput.value);
+        });
+
         buttonsContainer.appendChild(confirmBtn);
 
         const cancelBtn = document.createElement("button");
         cancelBtn.classList.add("project-input-cancel");
         cancelBtn.setAttribute("type", "button");
         cancelBtn.textContent = "Cancel";
+
+        cancelBtn.addEventListener("click", () => {
+            _toggleNewProjectForm();
+            emptyNameWarning.classList.remove("show");
+        });
         buttonsContainer.appendChild(cancelBtn);
-        
     }
 
     function _toggleNewTaskForm() {

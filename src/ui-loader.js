@@ -37,9 +37,6 @@ const UILoader = (function() {
     /* Forms */
 
 
-    window.onload = () => {};
-
-
     function _createNewTaskForm() {
         const background = document.querySelector(".task-input-background");
 

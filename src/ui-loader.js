@@ -30,7 +30,7 @@ const UILoader = (function() {
     /* Forms */
 
 
-    window.onload = () => {_createNewTaskForm(), _createNewProjectForm()};
+    window.onload = () => {_createNewTaskForm()};
 
 
     function _createNewTaskForm() {
@@ -150,7 +150,7 @@ const UILoader = (function() {
     }
 
     function _predefineFormProject(projectName) {
-        const projectInput = document.querySelector(".project-dropdown-input");
+        const projectInput = document.querySelector("#project-dropdown-input");
         projectInput.value = projectName;
     }
 
@@ -159,6 +159,12 @@ const UILoader = (function() {
 
         taskDateInput.value = HTML5DateInputValue;
     }
+
+    function _updateFormData() {
+        document.querySelector(".task-input-background").textContent = "";
+        _createNewTaskForm();
+        _predefineFormProject("Inbox");
+    };
 
     function _createNewProjectForm() {
         const projects = document.querySelector("#projects ul");
@@ -201,7 +207,11 @@ const UILoader = (function() {
                 emptyNameWarning.classList.add("show");
                 return;
             }
+
             storageUtils.addProject(nameInput.value);
+            _toggleNewProjectForm();
+            form.reset();
+            Sidebar.update();
         });
 
         buttonsContainer.appendChild(confirmBtn);
@@ -293,27 +303,56 @@ const UILoader = (function() {
             const li = document.createElement("li");
             li.classList.add("project", "row-container");
             li.dataset.project = name;
+            li.addEventListener("mouseover", () => {
+                tasks.classList.remove("show");
+                deleteBtn.classList.add("show");
+            });
+            li.addEventListener("mouseout", () => {
+                deleteBtn.classList.remove("show");
+                tasks.classList.add("show");
+            });
+            li.addEventListener('click', () => {
+                ProjectWindow.initWindow(name, storageUtils.getProject(name).tasks);
+            });
 
             const container = _createContainer("row");
+            li.appendChild(container);
 
             const tasks = document.createElement("span");
-            tasks.classList.add("project-tasks-count");
+            tasks.classList.add("project-tasks-count", "show");
             tasks.textContent = tasksCount;
-
-            li.appendChild(container);
             li.appendChild(tasks);
+
+            const deleteBtn = document.createElement("span");
+            deleteBtn.classList.add("delete-project-btn");
+            deleteBtn.textContent = "×";
+            deleteBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                storageUtils.removeProject(name);
+                Sidebar.update();
+
+                if (ProjectWindow.getCurrentProject() === name) { // if currently opened project is the one deleted
+                    ProjectWindow.setCurrentProject("Inbox");
+                    ProjectWindow.updateCurrentProject();
+                } else if (ProjectWindow.getCurrentProject() === "Today") {
+                    ProjectWindow.initWindow("Today", storageUtils.getTodayTasks());
+                }
+            });
+            li.appendChild(deleteBtn);
 
             const colorIcon = document.createElement("img");
             colorIcon.classList.add("circle");
             colorIcon.alt = "";
             colorIcon.src= "./assets/circle.png";
+            container.appendChild(colorIcon);
 
             const projectName = document.createElement("span");
             projectName.classList.add("menu-project-name");
             projectName.textContent = name;
-
-            container.appendChild(colorIcon);
             container.appendChild(projectName);
+
+
 
             return li;
         }
@@ -340,8 +379,10 @@ const UILoader = (function() {
 
                 const projectName = project.dataset.project;
 					
-                ProjectWindow.initWindow(projectName, projectsData[projectName].tasks);
-            });
+                if (projectsData[projectName]) {
+                    ProjectWindow.initWindow(projectName, projectsData[projectName].tasks);
+                }
+            }, {capture: true});
 
         }
 
@@ -383,13 +424,15 @@ const UILoader = (function() {
                 }
             }
 
+            _createNewProjectForm();
+
             const shownInboxTasksCount = document.querySelector(".project[data-project=\"Inbox\"] .project-tasks-count");
             const shownTodayTasksCount = document.querySelector(".project[data-project=\"Today\"] .project-tasks-count");
 
             shownInboxTasksCount.textContent = projectsData["Inbox"].tasks.length;
             shownTodayTasksCount.textContent = storageUtils.getTodayTasks().length;
 
-            addEventsToProjects(projectsData);
+            // addEventsToProjects(projectsData);
 
 
         }
@@ -428,6 +471,9 @@ const UILoader = (function() {
 
             btn.addEventListener('click', () => {
                 console.log("hug");
+
+                _updateFormData();
+
                 _toggleNewTaskForm();
             });
         }
@@ -476,7 +522,6 @@ const UILoader = (function() {
             
             const _task = _createContainer("row");
             _task.classList.add("task");
-            _task.setAttribute("title", "Edit task");
             _task.dataset.project = taskInfo.project;
             _task.dataset.index = index;
 
@@ -570,6 +615,10 @@ const UILoader = (function() {
                 
                 if (todayIsOpened) {
                     _showTaskProject(i, taskInfo.project);
+
+                    // disable task deletion
+                    const deleteButtons = Array.from(document.querySelectorAll(".delete-task"));
+                    deleteButtons.forEach(button => {button.style.display = "none"});
                 }
             });
         }
@@ -596,6 +645,7 @@ const UILoader = (function() {
                     _predefineFormProject("Inbox");
                     _predefineFormDate(DateFormatter.getHTML5Date(new Date()));
                 } else {
+                    _updateFormData();
                     _predefineFormProject(projectName);
                 }
 
@@ -627,6 +677,10 @@ const UILoader = (function() {
             return _currentProject;
         }
 
+        function setCurrentProject(newProjectName) {
+            _currentProject = newProjectName;
+        }
+
         function updateCurrentProject() {
             _currentTasksData = storageUtils.getProject(_currentProject).tasks;
             
@@ -638,7 +692,12 @@ const UILoader = (function() {
             _displayAll(projectName, tasksData);
         }
 
-        return {initWindow, getCurrentProject, updateCurrentProject};
+        return {
+            initWindow, 
+            getCurrentProject, 
+            setCurrentProject,
+            updateCurrentProject,
+        };
     })();
 
     return {Sidebar, Header, ProjectWindow, load};

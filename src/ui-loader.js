@@ -198,8 +198,8 @@ const UILoader = (function() {
     }
 
     function _toggleNewProjectForm() {
-        const form = document.querySelector("new-project-input");
-        form.classList.toggle("show");
+        const formContainer = document.querySelector(".new-project");
+        formContainer.classList.toggle("show");
     }
 
     /* General */
@@ -334,6 +334,14 @@ const UILoader = (function() {
             });
         }
 
+        function addNewProjectEvent() {
+            const newProjectBtn = document.querySelector("#new-project");
+
+            newProjectBtn.addEventListener("click", () => {
+                _toggleNewProjectForm();
+            });
+        }
+
         function update() {
             const projectsList = document.querySelector("#projects ul");
 
@@ -378,7 +386,8 @@ const UILoader = (function() {
             toggleShow, 
             addEventsToProjects, 
             addEventToToday,
-            addEventToInbox, 
+            addEventToInbox,
+            addNewProjectEvent, 
             update,
         };
     })();

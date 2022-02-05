@@ -162,11 +162,11 @@ const UILoader = (function() {
         const projects = document.querySelector("#projects ul");
 
         const li = document.createElement("li");
-        li.classList.add("row-container");
+        li.classList.add("col-container", "new-project");
         projects.appendChild(li);
 
         const form = document.createElement("form");
-        form.classList.add("new-project-input");
+        form.classList.add("new-project-input", "col-container");
         li.appendChild(form);
 
         const nameInput = document.createElement("input");
@@ -174,20 +174,21 @@ const UILoader = (function() {
         nameInput.classList.add("new-project-input-name");
         form.appendChild(nameInput);
 
+        const buttonsContainer = _createContainer("row");
+        buttonsContainer.classList.add("new-project-actions");
+        form.appendChild(buttonsContainer);
+
         const confirmBtn = document.createElement("button");
         confirmBtn.classList.add("project-input-confirm");
         confirmBtn.setAttribute("type", "button");
         confirmBtn.textContent = "Add project";
+        buttonsContainer.appendChild(confirmBtn);
 
         const cancelBtn = document.createElement("button");
         cancelBtn.classList.add("project-input-cancel");
         cancelBtn.setAttribute("type", "button");
         cancelBtn.textContent = "Cancel";
-
-        cancelBtn.addEventListener("click", () => {
-            _toggleNewTaskForm();
-            form.reset();
-        });
+        buttonsContainer.appendChild(cancelBtn);
         
     }
 

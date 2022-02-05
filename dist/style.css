@@ -188,8 +188,24 @@ aside:hover {
 }
 
 .project-tasks-count {
+    display: none;
     font-size: 0.85rem;
     color: rgb(128, 128, 128);
+
+}
+
+.project-tasks-count.show {
+    display: block;
+    /* animation: appear 0.1s forwards; */
+}
+
+.delete-project-btn {
+    display: none;
+}
+
+.delete-project-btn.show {
+    display: block;
+    /* animation: appear 0.1s forwards; */
 }
 
 /* Because of the icon design, word 'Today' near the icon may seem not centered. This is needed to adjust. */
@@ -212,7 +228,7 @@ aside ul li {
 aside ul li:hover {
     background: rgb(211, 211, 211);
     
-    transition: all 0.2s;
+    /* transition: all 0.1s; */
 }
 
 aside ul li.selected {

@@ -207,6 +207,10 @@ aside:hover {
     color: #808080;
 }
 
+.delete-project-btn:hover {
+    color: #505050;
+}
+
 .delete-project-btn.show {
     display: block;
     /* animation: appear 0.1s forwards; */
